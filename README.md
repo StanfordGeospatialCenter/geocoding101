@@ -1,5 +1,7 @@
 # Geocoding 101: An Introduction for Research Data Preparation
-Slides: https://slides.com/staceymaples/geocoding-101
+
+Slides: [https://slides.com/staceymaples/geocoding-101](https://slides.com/staceymaples/geocoding-101)
+This Guide is published on Github Pages at: [https://stanfordgeospatialcenter.github.io/geocoding101/](https://stanfordgeospatialcenter.github.io/geocoding101/)
 
 ## Code Examples
 
@@ -43,12 +45,14 @@ Different research questions require different types of geocoding. Understanding
 Address geocoding converts street addresses into coordinates, typically with high precision (rooftop or street-level accuracy). This is one of the most common geocoding tasks in research.
 
 **Use Cases:**
+
 - Mapping patient addresses for health studies (with appropriate privacy protections)
 - Analyzing customer or business locations
 - Studying residential patterns and neighborhood characteristics
 - Historical address research
 
 **Considerations:**
+
 - Address formats vary by country and region
 - Accuracy depends on the completeness and currency of reference street data
 - Address standardization and cleaning often necessary before geocoding
@@ -59,12 +63,14 @@ Address geocoding converts street addresses into coordinates, typically with hig
 Place name (or toponym) geocoding converts named locations—such as cities, landmarks, neighborhoods, or natural features—into coordinates. This typically returns a representative point for the named feature.
 
 **Use Cases:**
+
 - Geocoding historical place names from archives or texts
 - Mapping event locations from news reports or social media
 - Analyzing place mentions in literature or documents
 - Studying geographic distributions of cultural or historical phenomena
 
 **Considerations:**
+
 - Place names can be ambiguous (e.g., "Springfield" exists in many states)
 - Historical place names may have changed or no longer exist
 - Returned coordinates are usually centroids, not precise locations
@@ -75,12 +81,14 @@ Place name (or toponym) geocoding converts named locations—such as cities, lan
 Administrative geocoding converts administrative unit names (countries, states, counties, postal codes, etc.) into representative coordinates, typically the centroid of the area.
 
 **Use Cases:**
+
 - Mapping aggregated data reported by administrative units
 - Joining datasets based on administrative geography
 - Analyzing regional patterns and comparisons
 - Creating choropleth maps
 
 **Considerations:**
+
 - Returns centroid points, not boundaries (separate boundary data needed for polygon mapping)
 - Administrative boundaries change over time
 - Hierarchical specificity matters (city vs. county vs. state)
@@ -91,12 +99,14 @@ Administrative geocoding converts administrative unit names (countries, states, 
 Reverse geocoding works in the opposite direction: it takes coordinates and returns information about the nearest feature, such as an address, place name, or administrative unit.
 
 **Use Cases:**
+
 - Converting GPS coordinates to readable addresses
 - Identifying locations from coordinate data
 - Enriching coordinate-only datasets with contextual information
 - Quality checking geocoding results
 
 **Considerations:**
+
 - Returns nearest match, which may not be the exact location
 - Useful for validating forward geocoding results
 - Can help identify what type of feature a coordinate represents
@@ -106,12 +116,14 @@ Reverse geocoding works in the opposite direction: it takes coordinates and retu
 POI geocoding locates specific types of places such as businesses, landmarks, facilities, or services by name or category.
 
 **Use Cases:**
+
 - Mapping hospital, school, or park locations
 - Analyzing access to services and amenities
 - Studying commercial or institutional distributions
 - Creating proximity measures to specific facility types
 
 **Considerations:**
+
 - POI databases vary in coverage and currency
 - Business locations change frequently
 - May require category codes or filters for searches
@@ -136,6 +148,7 @@ Geocoding quality varies based on:
 - **Match type**: Whether the match was to an address, street segment, postal code, city, etc.
 
 High-quality research requires attention to these metrics and often involves:
+
 - Cleaning and standardizing input data
 - Reviewing and manually correcting low-confidence matches
 - Documenting geocoding methods and match rates
@@ -166,8 +179,6 @@ This guide provides a conceptual foundation for geocoding in research contexts. 
 - Best practices for data preparation and quality control
 
 Please refer to the additional documentation and tutorials provided by the Stanford Geospatial Center.
-
-
 
 ## Additional Resources
 
