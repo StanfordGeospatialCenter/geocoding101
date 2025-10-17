@@ -11,6 +11,24 @@ This guide walks you through a complete geocoding workflow in ArcGIS Pro using t
 
 **Important:** The locator.stanford.edu services are IP-restricted to the Stanford Network. If you cannot connect, ensure you are using the Stanford AnyConnect VPN. For VPN help, visit [Stanford IT VPN documentation](https://uit.stanford.edu/service/vpn).
 
+## About the clowns.csv dataset
+
+This tutorial uses the clowns.csv sample table to demonstrate geocoding workflows. The CSV contains point-address records (one row per record) with common address fields used for geocoding.
+
+This dataset was created from the Clowns of America International Membership Database (anonymized) obtained in 2007 from Clowns of America, International, for use in teaching. Attributes include those from the original data table ('City', 'ZipCode', 'Clown_Name', and 'Country'),  and an attribute 'Clown-Na_1' which represents the values in the 'Clown_Name' attribute field after a "Cluster and Edit" operation, performed in OpenRefine to collapse values so that "Co Co" or "Co-Co" both are clustered and edited to become "CoCo" for use in name frequency analysis.
+
+This layer is intended to be used for teaching and instruction at Stanford's Geospatial Center.
+Where to get the file
+
+- The archival source is hosted on Stanford Earthworks: [https://earthworks.stanford.edu/catalog/stanford-vx572wx7854](https://earthworks.stanford.edu/catalog/stanford-vx572wx7854)
+- **Download the CSV from that page and save it to your local Data folder** (for example ~/Documents/Geocoding/Data/ or C:\Users\<you>\Documents\Geocoding\Data\) before proceeding.
+
+Notes
+
+- Verify license and usage restrictions on the Earthworks record before reuse.
+- Inspect the ZipCode column for dropped leading zeros and follow the ZIP_str fix in Step 4 before geocoding.
+- If your downloaded file has a different schema, adjust field mappings in the Geocode Table tool accordingly.
+
 ## Step 1: Start ArcGIS Pro and Log In
 
 1. Launch **ArcGIS Pro**.
