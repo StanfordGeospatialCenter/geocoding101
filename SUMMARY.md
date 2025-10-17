@@ -9,4 +9,3 @@
 * [Geocoding Using OpenRefine](02-Geocoding_Using_OpenRefine.md)
 * [Geocoding with Python](03-Geocoding_with_Python.md)
 * [Other Geocoding Services](04-Other_Geocoding_Services.md)
-
