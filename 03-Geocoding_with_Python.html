@@ -1,0 +1,616 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Geocoding with Python · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.1.4">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="04-Other_Geocoding_Services.html" />
+    
+    
+    <link rel="prev" href="02-Geocoding_Using_OpenRefine.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction to Geocoding
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Geocoding Tutorials</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="00-Geocoding_Using_ArcGIS_Online.html">
+            
+                <a href="00-Geocoding_Using_ArcGIS_Online.html">
+            
+                    
+                    Geocoding with ArcGIS Online
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="01-Geocoding_Using_ArcGIS_Pro.html">
+            
+                <a href="01-Geocoding_Using_ArcGIS_Pro.html">
+            
+                    
+                    Geocoding Using ArcGIS Pro
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="02-Geocoding_Using_OpenRefine.html">
+            
+                <a href="02-Geocoding_Using_OpenRefine.html">
+            
+                    
+                    Geocoding Using OpenRefine
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.4" data-path="03-Geocoding_with_Python.html">
+            
+                <a href="03-Geocoding_with_Python.html">
+            
+                    
+                    Geocoding with Python
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="04-Other_Geocoding_Services.html">
+            
+                <a href="04-Other_Geocoding_Services.html">
+            
+                    
+                    Other Geocoding Services
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Geocoding with Python</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="geocoding-with-python-using-the-locatorstanfordedu-rest-api">Geocoding with Python: Using the locator.stanford.edu REST API</h1>
+<p>This guide introduces you to programmatic geocoding using Python and the Stanford Geospatial Center's locator service REST API. Unlike the graphical interfaces in ArcGIS Pro or ArcGIS Online, this approach uses Python code to submit address data directly to the geocoding service and process the results.</p>
+<h2 id="what-is-the-rest-api">What is the REST API?</h2>
+<p>REST (Representational State Transfer) API is a web service that allows programs to communicate over HTTP—the same protocol your web browser uses. The locator.stanford.edu service provides a REST API that accepts address data and returns geocoded coordinates in a structured format (JSON).</p>
+<p><strong>Key advantages of using the REST API:</strong></p>
+<ul>
+<li><strong>Automation</strong>: Process thousands or millions of addresses without manual intervention</li>
+<li><strong>Reproducibility</strong>: Your geocoding workflow is documented in code</li>
+<li><strong>Flexibility</strong>: Customize how you handle inputs, outputs, and errors</li>
+<li><strong>Integration</strong>: Easily incorporate geocoding into larger data processing pipelines</li>
+<li><strong>Batch Processing</strong>: Submit multiple addresses in a single request for efficiency</li>
+</ul>
+<h2 id="network-requirements">Network Requirements</h2>
+<p><strong>Important</strong>: The locator.stanford.edu services are <strong>IP-restricted to the Stanford Network</strong>. This means:</p>
+<ul>
+<li>✅ <strong>Works</strong>: On-campus computers, Stanford WiFi, Stanford VPN (AnyConnect)</li>
+<li>❌ <strong>Does NOT work</strong>: Cloud services like Google Colab, Jupyter Hub, or other external hosting</li>
+</ul>
+<p>If you're using cloud-based Python environments (Colab, Jupyter Hub, AWS, etc.), the geocoding requests will fail because these services run outside the Stanford IP range. For this exercise, you must run the Python notebook either:</p>
+<ul>
+<li>On a Stanford computer (lab, personal laptop on campus)</li>
+<li>Through Stanford VPN (AnyConnect)</li>
+<li>On a personal computer connected to Stanford WiFi</li>
+</ul>
+<h2 id="understanding-the-geocodeaddresses-endpoint">Understanding the GeocodeAddresses Endpoint</h2>
+<p>The locator service provides several geocoding endpoints. For batch geocoding (multiple addresses at once), we use the <strong>GeocodeAddresses</strong> endpoint:</p>
+<pre><code>https://locator.stanford.edu/arcgis/rest/services/geocode/USA/GeocodeServer/geocodeAddresses
+</code></pre><p>This endpoint accepts:</p>
+<ul>
+<li><strong>Input</strong>: A batch of up to 1,000 addresses in a structured JSON format</li>
+<li><strong>Output</strong>: Geocoded coordinates and match quality information for each address</li>
+</ul>
+<h3 id="available-regional-services">Available Regional Services</h3>
+<p>Different regional services are optimized for specific geographic areas:</p>
+<ul>
+<li><strong>USA</strong>: <code>https://locator.stanford.edu/arcgis/rest/services/geocode/USA/GeocodeServer/geocodeAddresses</code></li>
+<li><strong>North America</strong>: <code>https://locator.stanford.edu/arcgis/rest/services/geocode/NorthAmerica/GeocodeServer/geocodeAddresses</code></li>
+<li><strong>Latin America</strong>: <code>https://locator.stanford.edu/arcgis/rest/services/geocode/LatinAmerica/GeocodeServer/geocodeAddresses</code></li>
+<li><strong>Europe</strong>: <code>https://locator.stanford.edu/arcgis/rest/services/geocode/Europe/GeocodeServer/geocodeAddresses</code></li>
+<li><strong>Asia Pacific</strong>: <code>https://locator.stanford.edu/arcgis/rest/services/geocode/AsiaPacific/GeocodeServer/geocodeAddresses</code></li>
+<li><strong>Africa/Middle East</strong>: <code>https://locator.stanford.edu/arcgis/rest/services/geocode/MiddleEastAfrica/GeocodeServer/geocodeAddresses</code></li>
+</ul>
+<p>Choose the service that matches your data's geographic region for best results.</p>
+<h2 id="key-concepts-in-batch-geocoding">Key Concepts in Batch Geocoding</h2>
+<h3 id="1-request-structure">1. Request Structure</h3>
+<p>When geocoding with the REST API, you structure your data as JSON records. Each address includes fields like:</p>
+<ul>
+<li><code>Address</code>: Street address</li>
+<li><code>City</code>: City name</li>
+<li><code>Region</code>: State or province</li>
+<li><code>Postal</code>: ZIP or postal code</li>
+<li><code>CountryCode</code>: Country identifier</li>
+</ul>
+<p>The API expects these records in a specific format that tells the geocoding service how to interpret your data.</p>
+<h3 id="2-batch-processing">2. Batch Processing</h3>
+<p>Rather than geocoding one address at a time, batch processing submits multiple addresses together:</p>
+<ul>
+<li><strong>Efficiency</strong>: Fewer HTTP requests = faster overall processing</li>
+<li><strong>Server-friendly</strong>: Reduces load on the geocoding service</li>
+<li><strong>Recommended size</strong>: 100-1,000 addresses per batch</li>
+</ul>
+<p>The Python notebook demonstrates how to split a large dataset into appropriate batch sizes.</p>
+<h3 id="3-response-handling">3. Response Handling</h3>
+<p>The geocoding service returns JSON responses containing:</p>
+<ul>
+<li><strong>Coordinates</strong>: Latitude and longitude for each address</li>
+<li><strong>Match Score</strong>: Confidence level (0-100) in the geocode quality</li>
+<li><strong>Match Type</strong>: Type of match (address point, street segment, postal code, etc.)</li>
+<li><strong>Standardized Address</strong>: How the service interpreted your input</li>
+</ul>
+<p>Your Python code must parse this JSON to extract the information you need.</p>
+<h3 id="4-progress-tracking-and-error-handling">4. Progress Tracking and Error Handling</h3>
+<p>When processing large datasets, the Python notebook includes:</p>
+<ul>
+<li><strong>Progress reporting</strong>: Shows how many records are processed and time remaining</li>
+<li><strong>Error handling</strong>: Catches and reports failed requests without stopping the entire job</li>
+<li><strong>Resumable processing</strong>: Appends results as they complete, so you can stop and restart</li>
+<li><strong>Statistics</strong>: Final summary of processing speed and success rate</li>
+</ul>
+<h2 id="the-batch-geocoding-workflow">The Batch Geocoding Workflow</h2>
+<p>The Python notebook implements this workflow:</p>
+<ol>
+<li><strong>Read Input Data</strong>: Load addresses from a CSV file</li>
+<li><strong>Prepare Batches</strong>: Split addresses into chunks of appropriate size</li>
+<li><strong>Format Requests</strong>: Structure each batch according to API requirements</li>
+<li><strong>Submit to API</strong>: Send HTTP POST requests to the geocoding service</li>
+<li><strong>Parse Responses</strong>: Extract coordinates and match information from JSON</li>
+<li><strong>Write Results</strong>: Append geocoded data to output CSV file</li>
+<li><strong>Report Progress</strong>: Update user on status and estimated completion time</li>
+</ol>
+<h2 id="input-data-requirements">Input Data Requirements</h2>
+<p>Your input CSV file must have columns matching the geocoding service's expected fields:</p>
+<ul>
+<li><code>Address</code>: Street number and name</li>
+<li><code>City</code>: City name</li>
+<li><code>Region</code>: State/province (e.g., "CA" or "California")</li>
+<li><code>Postal</code>: ZIP/postal code</li>
+<li><code>CountryCode</code>: Optional, especially for US addresses</li>
+</ul>
+<p>Example CSV structure:</p>
+<pre><code class="lang-csv">Address,City,Region,Postal
+450 Serra Mall,Stanford,CA,94305
+1600 Amphitheatre Parkway,Mountain View,CA,94043
+</code></pre>
+<p>The notebook includes examples using datasets from the repository's Data folder:</p>
+<ul>
+<li><code>199Addresses.csv</code> - Small test dataset (199 records)</li>
+<li><code>clowns.csv</code> - Business locations</li>
+<li><code>SantaClara_TattooParlors.csv</code> - Tattoo parlor addresses</li>
+<li><code>oneMillionAddresses.csv</code> - Large-scale testing dataset</li>
+</ul>
+<h2 id="output-data">Output Data</h2>
+<p>The geocoding process creates a new CSV file with:</p>
+<ul>
+<li><strong>All original fields</strong>: Your input data is preserved</li>
+<li><strong>Coordinates</strong>: X (longitude) and Y (latitude) values</li>
+<li><strong>Match information</strong>: Score, address type, status</li>
+<li><strong>Standardized address</strong>: How the geocoder interpreted the location</li>
+</ul>
+<p>This enriched dataset can then be:</p>
+<ul>
+<li>Imported into GIS software for mapping</li>
+<li>Used for spatial analysis</li>
+<li>Combined with other geographic datasets</li>
+<li>Visualized on web maps</li>
+</ul>
+<h2 id="python-notebook-exercise">Python Notebook Exercise</h2>
+<p>The complete batch geocoding workflow is implemented in the Jupyter Notebook:</p>
+<p><strong><a href="Code/locator_batch_address_geocode_rest.ipynb">locator_batch_address_geocode_rest.ipynb</a></strong></p>
+<p>This notebook provides:</p>
+<ul>
+<li><strong>Detailed explanations</strong>: Each code section is documented for learners</li>
+<li><strong>Configurable parameters</strong>: Easy-to-adjust settings for your data</li>
+<li><strong>Progress monitoring</strong>: Real-time updates during processing</li>
+<li><strong>Error handling</strong>: Robust processing of large datasets</li>
+<li><strong>Reusable code</strong>: Function you can adapt for your own projects</li>
+</ul>
+<h3 id="what-youll-learn">What You'll Learn</h3>
+<p>By working through the notebook, you'll understand:</p>
+<ul>
+<li>How to structure HTTP requests to the geocoding API</li>
+<li>How to work with JSON data in Python</li>
+<li>How to process large datasets in batches</li>
+<li>How to parse API responses and extract needed information</li>
+<li>How to write results to CSV files</li>
+<li>How to monitor and report on long-running processes</li>
+</ul>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>To use the notebook, you need:</p>
+<ul>
+<li><strong>Python 3.x</strong> installed on your computer</li>
+<li><strong>Jupyter Notebook</strong> or <strong>JupyterLab</strong> (or use VS Code with Jupyter extension)</li>
+<li><strong>requests library</strong>: Install with <code>pip install requests</code></li>
+<li><strong>Stanford Network access</strong>: On-campus, WiFi, or VPN connection</li>
+<li><strong>A CSV file</strong> with addresses to geocode (or use provided sample data)</li>
+</ul>
+<h3 id="getting-started">Getting Started</h3>
+<ol>
+<li><strong>Download the notebook</strong>: <a href="Code/locator_batch_address_geocode_rest.ipynb">locator_batch_address_geocode_rest.ipynb</a></li>
+<li><strong>Connect to Stanford Network</strong>: Use VPN if off-campus</li>
+<li><strong>Open in Jupyter</strong>: Launch the notebook in your Jupyter environment</li>
+<li><strong>Configure parameters</strong>: Set your input/output file paths and batch sizes</li>
+<li><strong>Run the cells</strong>: Execute the notebook cells in order</li>
+<li><strong>Monitor progress</strong>: Watch the progress updates as geocoding proceeds</li>
+<li><strong>Review results</strong>: Check your output CSV file for geocoded data</li>
+</ol>
+<h2 id="python-vs-other-geocoding-methods">Python vs. Other Geocoding Methods</h2>
+<h3 id="when-to-use-python-geocoding">When to Use Python Geocoding</h3>
+<p>✅ <strong>Best for:</strong></p>
+<ul>
+<li>Large datasets (thousands to millions of addresses)</li>
+<li>Automated, recurring geocoding tasks</li>
+<li>Integration with data processing pipelines</li>
+<li>Custom error handling and quality control</li>
+<li>Research workflows requiring reproducibility</li>
+</ul>
+<h3 id="when-to-use-other-methods">When to Use Other Methods</h3>
+<p><strong>ArcGIS Pro</strong> is better for:</p>
+<ul>
+<li>Interactive geocoding with visual review</li>
+<li>Small to medium datasets</li>
+<li>When you need immediate visual feedback</li>
+<li>Integration with other ArcGIS workflows</li>
+</ul>
+<p><strong>ArcGIS Online</strong> is better for:</p>
+<ul>
+<li>Quick, one-time geocoding jobs</li>
+<li>Sharing geocoded data on web maps</li>
+<li>Collaborative projects</li>
+<li>When you don't have ArcGIS Pro installed</li>
+</ul>
+<p><strong>OpenRefine</strong> is better for:</p>
+<ul>
+<li>Data cleaning combined with geocoding</li>
+<li>Working with messy or inconsistent address data</li>
+<li>When you need to try different geocoding services</li>
+<li>Visual inspection and correction of results</li>
+</ul>
+<h2 id="advanced-topics">Advanced Topics</h2>
+<p>Once comfortable with the basic notebook, you can explore:</p>
+<h3 id="custom-field-mapping">Custom Field Mapping</h3>
+<p>Adapt the code to work with differently-structured CSV files by mapping your column names to the required API fields.</p>
+<h3 id="quality-filtering">Quality Filtering</h3>
+<p>Add logic to filter results based on match scores, excluding low-quality geocodes for manual review.</p>
+<h3 id="multi-region-geocoding">Multi-Region Geocoding</h3>
+<p>Modify the workflow to automatically select the appropriate regional service based on country codes in your data.</p>
+<h3 id="rate-limiting-and-throttling">Rate Limiting and Throttling</h3>
+<p>Implement delays between requests to be respectful of the geocoding service, especially for very large datasets.</p>
+<h3 id="integration-with-gis-libraries">Integration with GIS Libraries</h3>
+<p>Combine geocoding with libraries like <code>geopandas</code> to immediately create spatial datasets and perform geographic analysis.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="connection-errors">Connection Errors</h3>
+<p><strong>Problem</strong>: "Connection refused" or timeout errors</p>
+<p><strong>Solutions</strong>:</p>
+<ul>
+<li>Verify you're connected to Stanford Network or VPN</li>
+<li>Test the service URL in your web browser first</li>
+<li>Check that the endpoint URL is correct</li>
+</ul>
+<h3 id="json-parsing-errors">JSON Parsing Errors</h3>
+<p><strong>Problem</strong>: Error reading or parsing JSON responses</p>
+<p><strong>Solutions</strong>:</p>
+<ul>
+<li>Print the raw response to inspect its structure</li>
+<li>Check that your request format matches API requirements</li>
+<li>Verify the API hasn't changed its response format</li>
+</ul>
+<h3 id="low-match-rates">Low Match Rates</h3>
+<p><strong>Problem</strong>: Many addresses return low scores or fail to geocode</p>
+<p><strong>Solutions</strong>:</p>
+<ul>
+<li>Review your address data for formatting issues</li>
+<li>Check that fields are mapped correctly</li>
+<li>Verify you're using the appropriate regional service</li>
+<li>Consider data cleaning before geocoding</li>
+</ul>
+<h3 id="performance-issues">Performance Issues</h3>
+<p><strong>Problem</strong>: Geocoding is very slow</p>
+<p><strong>Solutions</strong>:</p>
+<ul>
+<li>Increase batch size (up to 1,000 addresses)</li>
+<li>Reduce unnecessary fields in requests</li>
+<li>Check your network connection speed</li>
+<li>Run during off-peak hours if processing very large datasets</li>
+</ul>
+<h2 id="privacy-and-data-considerations">Privacy and Data Considerations</h2>
+<p>Remember:</p>
+<ul>
+<li><strong>Do not geocode PHI</strong> (Protected Health Information)</li>
+<li><strong>Consult your IRB</strong> for research involving human subjects</li>
+<li><strong>No logging</strong>: The locator service doesn't retain your requests</li>
+<li><strong>Secure transmission</strong>: All communication uses HTTPS encryption</li>
+</ul>
+<h2 id="additional-resources">Additional Resources</h2>
+<h3 id="documentation">Documentation</h3>
+<ul>
+<li><a href="https://developers.arcgis.com/rest/services-reference/enterprise/geocode-service.htm" target="_blank">ArcGIS REST API Reference</a></li>
+<li><a href="https://requests.readthedocs.io/" target="_blank">Python requests library</a></li>
+<li><a href="https://docs.python.org/3/library/json.html" target="_blank">Working with JSON in Python</a></li>
+</ul>
+<h3 id="related-tutorials">Related Tutorials</h3>
+<ul>
+<li><a href="01-Geocoding_Using_ArcGIS_Pro.html">Geocoding with ArcGIS Pro</a></li>
+<li><a href="00-Geocoding_Using_ArcGIS_Online.html">Geocoding with ArcGIS Online</a></li>
+<li><a href="02-Geocoding_Using_OpenRefine.html">Geocoding with OpenRefine</a></li>
+<li><a href="04-Other_Geocoding_Services.html">Other Geocoding Services</a></li>
+</ul>
+<h3 id="support">Support</h3>
+<ul>
+<li><strong>Stanford Geospatial Center</strong>: <a href="https://library.stanford.edu/research/stanford-geospatial-center" target="_blank">https://library.stanford.edu/research/stanford-geospatial-center</a></li>
+<li><strong>Email Support</strong>: <a href="mailto:stacemaples@stanford.edu" target="_blank">stacemaples@stanford.edu</a></li>
+<li><strong>Mailing List</strong>: <a href="https://mailman.stanford.edu/mailman/listinfo/stanfordgis" target="_blank">stanfordgis@lists.stanford.edu</a></li>
+</ul>
+<hr></hr>
+<p><a href="./">← Back to Geocoding 101 Introduction</a> | <a href="Code/locator_batch_address_geocode_rest.ipynb">Open Python Notebook →</a></p>
+<p><em>Tutorial prepared by the Stanford Geospatial Center</em></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="02-Geocoding_Using_OpenRefine.html" class="navigation navigation-prev " aria-label="Previous page: Geocoding Using OpenRefine">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="04-Other_Geocoding_Services.html" class="navigation navigation-next " aria-label="Next page: Other Geocoding Services">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Geocoding with Python","level":"2.4","depth":1,"next":{"title":"Other Geocoding Services","level":"2.5","depth":1,"path":"04-Other_Geocoding_Services.md","ref":"04-Other_Geocoding_Services.md","articles":[]},"previous":{"title":"Geocoding Using OpenRefine","level":"2.3","depth":1,"path":"02-Geocoding_Using_OpenRefine.md","ref":"02-Geocoding_Using_OpenRefine.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"03-Geocoding_with_Python.md","mtime":"2025-10-17T19:37:19.323Z","type":"markdown"},"gitbook":{"version":"6.1.4","time":"2025-10-17T19:37:37.198Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/@honkit/honkit-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

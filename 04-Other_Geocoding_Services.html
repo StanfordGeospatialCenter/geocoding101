@@ -1,0 +1,832 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Other Geocoding Services · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.1.4">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="03-Geocoding_with_Python.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction to Geocoding
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Geocoding Tutorials</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="00-Geocoding_Using_ArcGIS_Online.html">
+            
+                <a href="00-Geocoding_Using_ArcGIS_Online.html">
+            
+                    
+                    Geocoding with ArcGIS Online
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="01-Geocoding_Using_ArcGIS_Pro.html">
+            
+                <a href="01-Geocoding_Using_ArcGIS_Pro.html">
+            
+                    
+                    Geocoding Using ArcGIS Pro
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="02-Geocoding_Using_OpenRefine.html">
+            
+                <a href="02-Geocoding_Using_OpenRefine.html">
+            
+                    
+                    Geocoding Using OpenRefine
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="03-Geocoding_with_Python.html">
+            
+                <a href="03-Geocoding_with_Python.html">
+            
+                    
+                    Geocoding with Python
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.5" data-path="04-Other_Geocoding_Services.html">
+            
+                <a href="04-Other_Geocoding_Services.html">
+            
+                    
+                    Other Geocoding Services
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Other Geocoding Services</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="geocoding-with-openrefine--the-geolocate-api">Geocoding with OpenRefine &amp; the GeoLocate API</h1>
+<h4 id="using-the-geolocate-community-server-api-to-geocode-esoteric-text-based-location-descriptions-with-uncertainty-estimates">Using the GeoLocate Community Server API to geocode esoteric text-based location descriptions with uncertainty estimates</h4>
+<h2 id="about-this-guide">About This Guide</h2>
+<p>This tutorial demonstrates how to use OpenRefine with the GeoLocate Community Server API to geocode location data that contains textual place descriptions rather than structured street addresses. The GeoLocate API is particularly well-suited for historical, museum, and natural history collections data where locations are described in narrative form, such as "5 miles west of Springfield along Route 66" or "near the confluence of the Green and Colorado Rivers."</p>
+<p>Unlike standard address geocoding services, GeoLocate provides <strong>uncertainty values</strong> that estimate the geographic extent of ambiguity in the location description. This makes it invaluable for geocoding older spatial location information associated with 19th and 20th century fieldwork in biology, archaeology, geology, natural history, and other fields where precise coordinates were not originally recorded.</p>
+<h2 id="about-the-dataset">About the Dataset</h2>
+<p>For this exercise, we'll use the <strong>California Haunted Places</strong> dataset (<code>ca_haunted_places.csv</code>), which contains location descriptions of reportedly haunted locations across California. This dataset is ideal for demonstrating GeoLocate's capabilities because:</p>
+<ul>
+<li>Locations are described in natural language rather than structured addresses</li>
+<li>Many descriptions reference landmarks, relative directions, and distances</li>
+<li>Location precision varies widely across records</li>
+<li>Some locations are historical and may no longer exist</li>
+</ul>
+<p>You can view the dataset here: <a href="Data/ca_haunted_places.csv">ca_haunted_places.csv</a></p>
+<h3 id="dataset-fields">Dataset Fields</h3>
+<p>The dataset includes:</p>
+<ul>
+<li><strong>location</strong>: Text description of the haunted location</li>
+<li><strong>city</strong>: City name</li>
+<li><strong>state</strong>: State name</li>
+<li><strong>state_abbrev</strong>: State abbreviation</li>
+<li><strong>description</strong>: Full narrative description of the haunting</li>
+<li><strong>longitude/latitude</strong>: Pre-existing coordinates (we'll compare our results to these)</li>
+</ul>
+<h2 id="getting-ready">Getting Ready</h2>
+<h3 id="download-the-data">Download the Data</h3>
+<p>Download the California Haunted Places dataset:</p>
+<p><a href="Data/ca_haunted_places.csv">ca_haunted_places.csv</a></p>
+<h3 id="download-and-install-openrefine">Download and Install OpenRefine</h3>
+<p>If you haven't already, download and install OpenRefine:</p>
+<p><a href="https://openrefine.org/download" target="_blank">https://openrefine.org/download</a></p>
+<p>OpenRefine is open-source software that allows you to manipulate and augment data. It runs in your browser but operates locally on your machine. For this exercise, OpenRefine will help us submit URLs to the GeoLocate API repeatedly for all our records, saving us from manual copy-and-paste work.</p>
+<h2 id="what-is-the-geolocate-api">What is the GeoLocate API?</h2>
+<p>The GeoLocate Community Server is a web-based geocoding service developed specifically for natural history collections and research data. Unlike standard geocoding services that expect street addresses, GeoLocate:</p>
+<ul>
+<li>Interprets natural language locality descriptions</li>
+<li>Handles relative distances and directions ("5 km NE of...")</li>
+<li>Works with historical place names and geographic features</li>
+<li>Provides <strong>uncertainty radius</strong> estimates for each geocoded point</li>
+<li>Returns geographic extent polygons showing possible location areas</li>
+</ul>
+<p>The GeoLocate API is freely available for educational and research use through their Community Server.</p>
+<h3 id="understanding-uncertainty-in-geocoding">Understanding Uncertainty in Geocoding</h3>
+<p>One of GeoLocate's most valuable features is its calculation of <strong>uncertainty radius</strong> values. When geocoding historical or textual location data, we rarely have absolute precision. Consider these examples:</p>
+<ul>
+<li>"Near San Francisco" - Could be anywhere within 10-50 miles</li>
+<li>"5 miles north of the Golden Gate Bridge" - More precise, but "5 miles" could mean 4.5-5.5 miles</li>
+<li>"123 Main Street, San Jose, CA" - Very precise, uncertainty might be 10-100 meters</li>
+</ul>
+<p>GeoLocate quantifies this uncertainty by providing:</p>
+<ul>
+<li><strong>Uncertainty Radius</strong>: Distance in meters representing the possible error</li>
+<li><strong>Uncertainty Polygon</strong>: The geographic area within which the true location likely falls</li>
+</ul>
+<p>This is crucial for:</p>
+<ul>
+<li><strong>Historical specimen data</strong>: Museum records from the 1800s-1900s with vague locations</li>
+<li><strong>Archaeological sites</strong>: "Near the old mill, south of town"</li>
+<li><strong>Geological surveys</strong>: "Outcrop along the river, 2 miles upstream from bridge"</li>
+<li><strong>Biological field notes</strong>: "Oak grove on hillside above valley floor"</li>
+</ul>
+<h2 id="building-your-template-query">Building Your Template Query</h2>
+<p>The GeoLocate API endpoint for the Community Server is:</p>
+<p><code>https://www.geo-locate.org/webservices/geolocatesvcv2/glcwrap.aspx</code></p>
+<p>Let's build a test query using one record from our haunted places dataset.</p>
+<h3 id="example-location-description">Example Location Description</h3>
+<p>Let's use the first record from our dataset:</p>
+<ul>
+<li><strong>Location</strong>: "Ada Cemetery"</li>
+<li><strong>City</strong>: "Ada"</li>
+<li><strong>State</strong>: "Michigan"</li>
+</ul>
+<h3 id="constructing-the-url">Constructing the URL</h3>
+<p>The GeoLocate API uses these key parameters:</p>
+<ul>
+<li><code>locality</code>: The location description text</li>
+<li><code>state</code>: State name or abbreviation</li>
+<li><code>country</code>: Country name</li>
+<li><code>fmt</code>: Output format (we'll use <code>json</code>)</li>
+</ul>
+<p>A complete query URL looks like this:</p>
+<pre><code>https://www.geo-locate.org/webservices/geolocatesvcv2/glcwrap.aspx?locality=Ada+Cemetery&amp;state=Michigan&amp;country=United+States&amp;fmt=json
+</code></pre><h3 id="test-the-query">Test the Query</h3>
+<ol>
+<li>Copy the URL above into your web browser</li>
+<li>Press Enter to submit the query</li>
+<li>You should receive JSON-formatted results</li>
+</ol>
+<p>The response will look something like this:</p>
+<pre><code class="lang-json">{
+<span class="hljs-string">"engineVersion"</span> : <span class="hljs-string">"GLC:9.3|U:1.01374|eng:1.0"</span>,
+<span class="hljs-string">"numResults"</span> : <span class="hljs-number">1</span>,
+<span class="hljs-string">"executionTimems"</span> : <span class="hljs-number">171.8821</span>,
+<span class="hljs-string">"resultSet"</span> : { <span class="hljs-string">"type"</span>: <span class="hljs-string">"FeatureCollection"</span>,
+<span class="hljs-string">"features"</span>: [
+{ <span class="hljs-string">"type"</span>: <span class="hljs-string">"Feature"</span>,
+<span class="hljs-string">"geometry"</span>: {<span class="hljs-string">"type"</span>: <span class="hljs-string">"Point"</span>, <span class="hljs-string">"coordinates"</span>: [-<span class="hljs-number">85.504733</span>, <span class="hljs-number">42.962303</span>]},
+<span class="hljs-string">"properties"</span>: {
+<span class="hljs-string">"parsePattern"</span> : <span class="hljs-string">"ADA CEMETERY"</span>,
+<span class="hljs-string">"precision"</span> : <span class="hljs-string">"High"</span>,
+<span class="hljs-string">"score"</span> : <span class="hljs-number">87</span>,
+<span class="hljs-string">"uncertaintyRadiusMeters"</span> : <span class="hljs-string">"Unavailable"</span>,
+<span class="hljs-string">"uncertaintyPolygon"</span> : <span class="hljs-string">"Unavailable"</span>,
+<span class="hljs-string">"displacedDistanceMiles"</span> : <span class="hljs-number">0</span>,
+<span class="hljs-string">"displacedHeadingDegrees"</span> : <span class="hljs-number">0</span>,
+<span class="hljs-string">"debug"</span> : <span class="hljs-string">":GazPartMatch=False|:inAdm=True|:Adm=KENT|:NP=ADA CEMETERY|:KFID=|ADA CEMETERY"</span>
+}
+}
+ ],
+<span class="hljs-string">"crs"</span>: { <span class="hljs-string">"type"</span> : <span class="hljs-string">"EPSG"</span>, <span class="hljs-string">"properties"</span> : { <span class="hljs-string">"code"</span> : <span class="hljs-number">4326</span> }}
+}
+}
+</code></pre>
+<h3 id="key-response-fields">Key Response Fields</h3>
+<ul>
+<li><strong>engineVersion</strong> — API engine/version string
+JSON path: <code>engineVersion</code></li>
+<li><strong>numResults</strong> — Number of results returned (integer)
+JSON path: <code>numResults</code></li>
+<li><strong>executionTimems</strong> — Query execution time in milliseconds (number)
+JSON path: <code>executionTimems</code></li>
+<li><strong>resultSet.type</strong> — Typically <code>"FeatureCollection"</code> (GeoJSON wrapper)
+JSON path: <code>resultSet.type</code></li>
+<li><strong>resultSet.features</strong> — Array of Feature objects; usually use the first feature (<code>features[0]</code>)
+JSON path: <code>resultSet.features[0]</code></li>
+<li><strong>coordinates</strong> — Point coordinates as [longitude, latitude] (x, y)
+JSON path: <code>resultSet.features[0].geometry.coordinates</code>
+Note: longitude = coordinates[0], latitude = coordinates[1]</li>
+<li><strong>parsePattern</strong> — How GeoLocate parsed/normalized the locality string (often uppercase)
+JSON path: <code>resultSet.features[0].properties.parsePattern</code></li>
+<li><strong>precision</strong> — Quality rating (e.g., High, Medium, Low)
+JSON path: <code>resultSet.features[0].properties.precision</code></li>
+<li><strong>score</strong> — Confidence score (0–100)
+JSON path: <code>resultSet.features[0].properties.score</code></li>
+<li><strong>uncertaintyRadiusMeters</strong> — Estimated error radius in meters, or the string <code>"Unavailable"</code> when not provided
+JSON path: <code>resultSet.features[0].properties.uncertaintyRadiusMeters</code></li>
+<li><strong>uncertaintyPolygon</strong> — WKT polygon describing the uncertainty area, or <code>"Unavailable"</code>
+JSON path: <code>resultSet.features[0].properties.uncertaintyPolygon</code></li>
+<li><strong>displacedDistanceMiles</strong> — Distance the returned point was displaced from the original interpreted location (miles)
+JSON path: <code>resultSet.features[0].properties.displacedDistanceMiles</code></li>
+<li><strong>displacedHeadingDegrees</strong> — Heading (degrees) for any displacement applied to the point
+JSON path: <code>resultSet.features[0].properties.displacedHeadingDegrees</code></li>
+<li><strong>debug</strong> — Internal parse/debug string useful for troubleshooting matches
+JSON path: <code>resultSet.features[0].properties.debug</code></li>
+<li><strong>crs</strong> — Coordinate reference system object (e.g., EPSG:4326)
+JSON path: <code>resultSet.crs</code></li>
+</ul>
+<h4 id="examples-for-using-grel-in-openrefine-for-access-first-feature">Examples for using GREL in OpenRefine for access (first feature):</h4>
+<ul>
+<li>Longitude: <code>value.parseJson().resultSet.features[0].geometry.coordinates[0]</code></li>
+<li>Latitude:  <code>value.parseJson().resultSet.features[0].geometry.coordinates[1]</code></li>
+<li>Uncertainty: <code>value.parseJson().resultSet.features[0].properties.uncertaintyRadiusMeters</code></li>
+<li>Parse pattern: <code>value.parseJson().resultSet.features[0].properties.parsePattern</code></li>
+<li>Score: <code>value.parseJson().resultSet.features[0].properties.score</code></li>
+<li>Debug: <code>value.parseJson().resultSet.features[0].properties.debug</code></li>
+</ul>
+<h2 id="setting-up-openrefine">Setting Up OpenRefine</h2>
+<h3 id="import-the-data">Import the Data</h3>
+<ol>
+<li>Launch OpenRefine (it will open in your browser at <a href="http://127.0.0.1:3333" target="_blank">http://127.0.0.1:3333</a>)</li>
+<li>Click <strong>Create Project</strong></li>
+<li>Choose <strong>This Computer</strong> and browse to <code>ca_haunted_places.csv</code></li>
+<li>Click <strong>Next</strong></li>
+<li>Review the data preview and click <strong>Create Project</strong></li>
+</ol>
+<h3 id="examine-the-data">Examine the Data</h3>
+<p>Look at the <strong>location</strong>, <strong>city</strong>, and <strong>state</strong> columns. Notice how locations vary:</p>
+<ul>
+<li>Some are specific: "Ada Cemetery"</li>
+<li>Some are vague: "North Adams Rd."</li>
+<li>Some include directions: "Gorman Rd. west towards Sand Creek"</li>
+<li>Some reference landmarks: "Ghost Trestle"</li>
+</ul>
+<p>This variability makes GeoLocate ideal for this dataset.</p>
+<h2 id="creating-the-api-call-in-openrefine">Creating the API Call in OpenRefine</h2>
+<h3 id="step-1-build-the-base-url">Step 1: Build the Base URL</h3>
+<p>We need to construct a URL that combines:</p>
+<ul>
+<li>The GeoLocate API endpoint</li>
+<li>Our location data from the <strong>location</strong> column</li>
+<li>Our city data from the <strong>city</strong> column</li>
+<li>Our state data from the <strong>state</strong> column</li>
+</ul>
+<h3 id="step-2-add-a-column-by-fetching-urls">Step 2: Add a Column by Fetching URLs</h3>
+<ol>
+<li>Click on the dropdown arrow next to the <strong>location</strong> column</li>
+<li>Select <strong>Edit column</strong> &gt; <strong>Add column by fetching URLs...</strong></li>
+<li>Name the new column: <code>geolocate_json</code></li>
+</ol>
+<h3 id="step-3-create-the-expression">Step 3: Create the Expression</h3>
+<p>In the Expression box, enter:</p>
+<pre><code>"https://www.geo-locate.org/webservices/geolocatesvcv2/glcwrap.aspx?locality=" + 
+escape(cells["location"].value, "url") + 
+"&amp;state=" + escape(cells["state"].value, "url") + 
+"&amp;country=United+States&amp;fmt=json"
+</code></pre><p>This expression:</p>
+<ul>
+<li>Starts with the base GeoLocate API URL</li>
+<li>Adds the <strong>locality</strong> parameter using the location column value</li>
+<li>Adds the <strong>state</strong> parameter using the state column value</li>
+<li>Adds a fixed country parameter</li>
+<li>Requests JSON format output</li>
+<li>Uses <code>escape()</code> to properly encode special characters for URLs</li>
+</ul>
+<h3 id="step-4-configure-throttling">Step 4: Configure Throttling</h3>
+<p><strong>Important</strong>: Set the <strong>Throttle delay</strong> to at least <strong>200 milliseconds</strong> (0.2 seconds). This prevents overwhelming the GeoLocate server with requests.</p>
+<h3 id="step-5-run-the-fetch">Step 5: Run the Fetch</h3>
+<p>Click <strong>OK</strong> and OpenRefine will:</p>
+<ul>
+<li>Build a custom URL for each row</li>
+<li>Submit each URL to the GeoLocate API</li>
+<li>Store the JSON response in the new <code>geolocate_json</code> column</li>
+</ul>
+<p>This may take several minutes depending on the size of your dataset.</p>
+<h2 id="parsing-the-json-response">Parsing the JSON Response</h2>
+<p>Now we need to extract useful information from the JSON responses.</p>
+<h3 id="extract-longitude">Extract Longitude</h3>
+<ol>
+<li>Click the dropdown on <strong>geolocate_json</strong> column</li>
+<li>Select <strong>Edit column</strong> &gt; <strong>Add column based on this column</strong></li>
+<li>Name it: <code>longitude</code></li>
+<li>Use this expression:</li>
+</ol>
+<pre><code>value.parseJson().resultSet.features[0].geometry.coordinates[0]
+</code></pre><h3 id="extract-latitude">Extract Latitude</h3>
+<ol>
+<li>Click the dropdown on <strong>geolocate_json</strong> column</li>
+<li>Select <strong>Edit column</strong> &gt; <strong>Add column based on this column</strong></li>
+<li>Name it: <code>latitude</code></li>
+<li>Use this expression:</li>
+</ol>
+<pre><code>value.parseJson().resultSet.features[0].geometry.coordinates[1]
+</code></pre><h3 id="extract-uncertainty-radius">Extract Uncertainty Radius</h3>
+<ol>
+<li>Click the dropdown on <strong>geolocate_json</strong> column</li>
+<li>Select <strong>Edit column</strong> &gt; <strong>Add column based on this column</strong></li>
+<li>Name it: <code>uncertainty_meters</code></li>
+<li>Use this expression:</li>
+</ol>
+<pre><code>value.parseJson().resultSet.features[0].properties.uncertaintyRadiusMeters
+</code></pre><h3 id="extract-precision-level">Extract Precision Level</h3>
+<ol>
+<li>Click the dropdown on <strong>geolocate_json</strong> column</li>
+<li>Select <strong>Edit column</strong> &gt; <strong>Add column based on this column</strong></li>
+<li>Name it: <code>precision</code></li>
+<li>Use this expression:</li>
+</ol>
+<pre><code>value.parseJson().resultSet.features[0].properties.precision
+</code></pre><h3 id="extract-match-score">Extract Match Score</h3>
+<ol>
+<li>Click the dropdown on <strong>geolocate_json</strong> column</li>
+<li>Select <strong>Edit column</strong> &gt; <strong>Add column based on this column</strong></li>
+<li>Name it: <code>score</code></li>
+<li>Use this expression:</li>
+</ol>
+<pre><code>value.parseJson().resultSet.features[0].properties.score
+</code></pre><h2 id="interpreting-results">Interpreting Results</h2>
+<h3 id="understanding-uncertainty-values">Understanding Uncertainty Values</h3>
+<p>Look at your new <strong>uncertainty_meters</strong> column. You'll see values ranging from small (high precision) to large (low precision):</p>
+<ul>
+<li><strong>&lt; 100 meters</strong>: Very precise, specific address or landmark</li>
+<li><strong>100-1000 meters</strong>: Good precision, named place or feature</li>
+<li><strong>1000-5000 meters</strong>: Moderate precision, general area</li>
+<li><strong>&gt; 5000 meters</strong>: Low precision, vague description</li>
+</ul>
+<h3 id="understanding-precision-levels">Understanding Precision Levels</h3>
+<p>The <strong>precision</strong> column shows:</p>
+<ul>
+<li><strong>High</strong>: Specific, well-defined location</li>
+<li><strong>Medium</strong>: Reasonably well-defined location with some ambiguity</li>
+<li><strong>Low</strong>: Vague or ambiguous location description</li>
+</ul>
+<h3 id="understanding-match-scores">Understanding Match Scores</h3>
+<p>The <strong>score</strong> column (0-100) indicates confidence:</p>
+<ul>
+<li><strong>90-100</strong>: Excellent match</li>
+<li><strong>80-89</strong>: Good match</li>
+<li><strong>70-79</strong>: Fair match</li>
+<li><strong>&lt; 70</strong>: Poor match, review manually</li>
+</ul>
+<h2 id="comparing-results">Comparing Results</h2>
+<p>If your original dataset had coordinates (like our haunted places data), you can compare:</p>
+<ol>
+<li>Create a column to calculate distance between original and GeoLocate coordinates</li>
+<li>Identify records with large discrepancies</li>
+<li>Use uncertainty values to understand if differences are within expected error</li>
+</ol>
+<h3 id="calculate-distance-difference">Calculate Distance Difference</h3>
+<p>Add a column with this expression (approximate):</p>
+<pre><code>abs(cells["longitude"].value - value.parseJson().resultSet.features[0].geometry.coordinates[0]) * 111000
+</code></pre><p>This gives a rough east-west distance in meters.</p>
+<h2 id="filtering-and-quality-control">Filtering and Quality Control</h2>
+<h3 id="filter-by-precision">Filter by Precision</h3>
+<p>Use OpenRefine's faceting to filter results:</p>
+<ol>
+<li>Click dropdown on <strong>precision</strong> column</li>
+<li>Select <strong>Facet</strong> &gt; <strong>Text facet</strong></li>
+<li>Review counts of High/Medium/Low precision matches</li>
+<li>Filter to show only low precision matches for manual review</li>
+</ol>
+<h3 id="filter-by-uncertainty">Filter by Uncertainty</h3>
+<ol>
+<li>Click dropdown on <strong>uncertainty_meters</strong> column</li>
+<li>Select <strong>Facet</strong> &gt; <strong>Numeric facet</strong></li>
+<li>Adjust the slider to focus on high uncertainty records</li>
+<li>Review these records manually</li>
+</ol>
+<h3 id="filter-by-score">Filter by Score</h3>
+<ol>
+<li>Click dropdown on <strong>score</strong> column</li>
+<li>Select <strong>Facet</strong> &gt; <strong>Numeric facet</strong></li>
+<li>Focus on scores below 80 for review</li>
+</ol>
+<h2 id="handling-failed-geocodes">Handling Failed Geocodes</h2>
+<p>Some records may fail to geocode. To identify them:</p>
+<ol>
+<li>Click dropdown on <strong>longitude</strong> column</li>
+<li>Select <strong>Facet</strong> &gt; <strong>Customized facets</strong> &gt; <strong>Facet by blank</strong></li>
+<li>Review records that returned no coordinates</li>
+</ol>
+<p>Common reasons for failure:</p>
+<ul>
+<li>Location name not found in GeoLocate's database</li>
+<li>Description too vague or ambiguous</li>
+<li>Typos or incorrect place names</li>
+<li>Historical names no longer recognized</li>
+</ul>
+<h3 id="manual-review-strategies">Manual Review Strategies</h3>
+<p>For failed or low-quality geocodes:</p>
+<ol>
+<li>Check the original <strong>location</strong> and <strong>city</strong> fields</li>
+<li>Try simplifying the location description</li>
+<li>Use just the city name if location is too obscure</li>
+<li>Consider alternative geocoding services for specific addresses</li>
+</ol>
+<h2 id="exporting-your-results">Exporting Your Results</h2>
+<p>Once satisfied with your geocoding results:</p>
+<ol>
+<li>Click <strong>Export</strong> in the top-right corner</li>
+<li>Choose your format:<ul>
+<li><strong>Comma-separated values (CSV)</strong>: For spreadsheets</li>
+<li><strong>Tab-separated values (TSV)</strong>: For import to GIS software</li>
+<li><strong>Excel</strong>: For Microsoft Excel</li>
+</ul>
+</li>
+<li>Save your enriched dataset</li>
+</ol>
+<h2 id="use-cases-for-geolocate-with-historical-data">Use Cases for GeoLocate with Historical Data</h2>
+<h3 id="museum-collections">Museum Collections</h3>
+<p>Natural history museums have millions of specimen records with locality descriptions like:</p>
+<ul>
+<li>"Collected 5 miles east of Yosemite Valley, 1892"</li>
+<li>"Along the Merced River below Vernal Falls"</li>
+<li>"Oak woodland, west slope Sierra Nevada"</li>
+</ul>
+<p>GeoLocate interprets these descriptions and provides realistic uncertainty estimates, allowing researchers to:</p>
+<ul>
+<li>Map historical species distributions</li>
+<li>Track environmental change over time</li>
+<li>Identify sampling gaps in collections</li>
+</ul>
+<h3 id="archaeological-records">Archaeological Records</h3>
+<p>Archaeological site descriptions often use landmarks and relative positions:</p>
+<ul>
+<li>"Midden site on bluff overlooking river confluence"</li>
+<li>"Rock shelter 2 km upstream from bridge"</li>
+<li>"Burial mound complex, south of old mission"</li>
+</ul>
+<p>The uncertainty radii help researchers:</p>
+<ul>
+<li>Plan survey areas for site relocations</li>
+<li>Assess site density and clustering</li>
+<li>Protect site locations while sharing data</li>
+</ul>
+<h3 id="geological-surveys">Geological Surveys</h3>
+<p>Historical geology field notes contain descriptions like:</p>
+<ul>
+<li>"Limestone outcrop along creek, 1.5 miles below dam"</li>
+<li>"Coal seam exposed in railroad cut near tunnel"</li>
+<li>"Fault scarp crossing valley floor east of town"</li>
+</ul>
+<p>Uncertainty values help geologists:</p>
+<ul>
+<li>Revisit historical sample locations</li>
+<li>Integrate historical and modern datasets</li>
+<li>Assess data quality for different uses</li>
+</ul>
+<h2 id="best-practices">Best Practices</h2>
+<h3 id="prepare-your-data">Prepare Your Data</h3>
+<ol>
+<li><strong>Clean location descriptions</strong>: Remove excess punctuation and formatting</li>
+<li><strong>Standardize state/country names</strong>: Use full names or standard abbreviations</li>
+<li><strong>Separate address components</strong>: If you have them, use separate fields for better results</li>
+</ol>
+<h3 id="optimize-api-calls">Optimize API Calls</h3>
+<ol>
+<li><strong>Use appropriate throttle delays</strong>: Don't overwhelm the server</li>
+<li><strong>Cache results</strong>: Save the JSON responses to avoid re-geocoding</li>
+<li><strong>Batch large datasets</strong>: Process in smaller chunks if needed</li>
+</ol>
+<h3 id="document-your-process">Document Your Process</h3>
+<p>Record:</p>
+<ul>
+<li>Date of geocoding</li>
+<li>GeoLocate API version (if available)</li>
+<li>Any manual corrections made</li>
+<li>Criteria for accepting/rejecting matches</li>
+<li>How uncertainty values were used in analysis</li>
+</ul>
+<h3 id="validate-results">Validate Results</h3>
+<ol>
+<li><strong>Spot check</strong>: Manually verify a sample of geocoded locations</li>
+<li><strong>Use uncertainty values</strong>: Assess if precision meets your needs</li>
+<li><strong>Compare to existing coordinates</strong>: If available</li>
+<li><strong>Map results</strong>: Visual inspection often reveals errors</li>
+</ol>
+<h2 id="advanced-techniques">Advanced Techniques</h2>
+<h3 id="extracting-uncertainty-polygons">Extracting Uncertainty Polygons</h3>
+<p>GeoLocate returns uncertainty polygons in WKT (Well-Known Text) format. To extract:</p>
+<pre><code>value.parseJson().resultSet.features[0].properties.uncertaintyPolygon
+</code></pre><p>These polygons can be imported into GIS software for spatial analysis.</p>
+<h3 id="combining-multiple-geocoding-services">Combining Multiple Geocoding Services</h3>
+<p>For best results, consider:</p>
+<ol>
+<li>Try GeoLocate first for natural language descriptions</li>
+<li>Fall back to address geocoders for structured addresses</li>
+<li>Use different services for different location types</li>
+</ol>
+<h3 id="handling-international-locations">Handling International Locations</h3>
+<p>For locations outside the US:</p>
+<ul>
+<li>Specify the correct country parameter</li>
+<li>Be aware that GeoLocate coverage varies by country</li>
+<li>Consider regional geocoding services for better results</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="no-results-returned">No Results Returned</h3>
+<p><strong>Problem</strong>: JSON response is empty or contains no features</p>
+<p><strong>Solutions</strong>:</p>
+<ul>
+<li>Simplify location description</li>
+<li>Check spelling of place names</li>
+<li>Try using only city and state</li>
+<li>Verify country is correct</li>
+</ul>
+<h3 id="high-uncertainty-values">High Uncertainty Values</h3>
+<p><strong>Problem</strong>: Uncertainty radius is very large (&gt;10,000 meters)</p>
+<p><strong>Solutions</strong>:</p>
+<ul>
+<li>Add more specific location details if available</li>
+<li>Accept the uncertainty if description is inherently vague</li>
+<li>Consider whether precision meets your research needs</li>
+<li>Flag for manual research</li>
+</ul>
+<h3 id="api-rate-limiting">API Rate Limiting</h3>
+<p><strong>Problem</strong>: Requests are being blocked or timing out</p>
+<p><strong>Solutions</strong>:</p>
+<ul>
+<li>Increase throttle delay in OpenRefine</li>
+<li>Process data in smaller batches</li>
+<li>Contact GeoLocate for higher rate limits if needed</li>
+<li>Spread processing over multiple sessions</li>
+</ul>
+<h3 id="parse-errors-in-openrefine">Parse Errors in OpenRefine</h3>
+<p><strong>Problem</strong>: Expression returns errors or null values</p>
+<p><strong>Solutions</strong>:</p>
+<ul>
+<li>Check JSON structure has expected format</li>
+<li>Add null-checking to expressions: <code>if(value != null, ...)</code></li>
+<li>Verify API responses are complete</li>
+<li>Review OpenRefine expression syntax</li>
+</ul>
+<h2 id="additional-resources">Additional Resources</h2>
+<h3 id="documentation">Documentation</h3>
+<ul>
+<li><a href="https://www.geo-locate.org/web-services/" target="_blank">GeoLocate Web Services Documentation</a></li>
+<li><a href="https://docs.openrefine.org/" target="_blank">OpenRefine User Manual</a></li>
+<li><a href="https://docs.gbif.org/georeferencing-best-practices/" target="_blank">Understanding Georeferencing</a></li>
+</ul>
+<h3 id="related-tools">Related Tools</h3>
+<ul>
+<li><strong>GEOLocate Desktop</strong>: Standalone application with visual verification</li>
+<li><strong>QGIS</strong>: For mapping and analyzing geocoded results</li>
+<li><strong>GeoPick</strong>: For collaborative georeferencing projects</li>
+</ul>
+<h3 id="community-resources">Community Resources</h3>
+<ul>
+<li><a href="https://www.idigbio.org/content/georeferencing" target="_blank">iDigBio Georeferencing Community</a></li>
+<li><a href="https://github.com/tdwg/prior-standards/blob/master/georeferencing-best-practices/" target="_blank">TDWG Georeferencing Best Practices</a></li>
+</ul>
+<h3 id="support">Support</h3>
+<ul>
+<li>For GeoLocate questions: Contact through <a href="https://www.geo-locate.org/" target="_blank">geo-locate.org</a></li>
+<li>For OpenRefine help: <a href="https://forum.openrefine.org/" target="_blank">OpenRefine Community Forum</a></li>
+</ul>
+<hr></hr>
+<p><a href="./">← Back to Geocoding 101 Introduction</a></p>
+<p><em>Tutorial prepared by the Stanford Geospatial Center</em></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="03-Geocoding_with_Python.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Geocoding with Python">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Other Geocoding Services","level":"2.5","depth":1,"previous":{"title":"Geocoding with Python","level":"2.4","depth":1,"path":"03-Geocoding_with_Python.md","ref":"03-Geocoding_with_Python.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"04-Other_Geocoding_Services.md","mtime":"2025-10-17T19:37:19.323Z","type":"markdown"},"gitbook":{"version":"6.1.4","time":"2025-10-17T19:37:37.198Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/@honkit/honkit-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
