@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body for="html-export">
+    <div class="crossnote markdown-preview"></div>
+    <h1 id="welcome-to-the-locatorstanfordedu-geocoding-service">Welcome to the <strong><a
+                href="http://locator.stanford.edu">locator.stanford.edu</a></strong> geocoding service </h1>
+    <p>The Main REST API Service Endpoint is at: <a
+            href="https://locator.stanford.edu/arcgis">https://locator.stanford.edu/arcgis</a></p>
+    <h2 id="introduction">Introduction </h2>
+    <p>The Stanford Geospatial Center’s geocoding service is now in full production for research applications and data
+        augmentation.</p>
+    <p>Geocoding uses reference datasets (e.g., street networks, administrative boundaries, and gazetteers) to convert
+        text-based locations (such as addresses, place names, or administrative units) into precise latitude/longitude
+        coordinates. These coordinates can be used to extract values from other datasets or measure proximity to
+        features and phenomena.</p>
+    <p>The service, powered by Esri's ArcGIS Server technology, provides:</p>
+    <ul>
+        <li><strong>US Street Address Geocoding</strong></li>
+        <li>Geocoding for <strong>Street Addresses</strong>, <strong>Place Names</strong>, and <strong>Administrative
+                Unit centroids</strong> across <em><strong>North and South America</strong></em></li>
+        <li><strong>Reverse Geocoding</strong>, which converts coordinates into the nearest feature (e.g., address or
+            place name).</li>
+    </ul>
+    <h2 id="data-documentation">Data documentation </h2>
+    <p>Links to full documentation for the data and "locators" used in this service can be found below:</p>
+    <ul>
+        <li><a href="https://locator.stanford.edu/LA2021.1/helpcontents/index.htm">StreetMap Premium, Latin America</a>
+        </li>
+        <li><a href="https://locator.stanford.edu/NA2021.4/helpcontents/index.htm">StreetMap Premium, North America</a>
+        </li>
+        <li><a href="https://locator.stanford.edu/EU2021.2/helpcontents/index.htm">StreetMap Premium, Europe</a></li>
+        <li><a href="https://locator.stanford.edu/AP2021.1/helpcontents/index.htm">StreetMap Premium Asia &amp;
+                Pacific</a></li>
+        <li><a href="https://locator.stanford.edu/MA2021.1/helpcontents/index.htm">StreetMap Premium, Africa &amp;
+                Middle East</a></li>
+    </ul>
+    <h3 id="key-information-about-the-service">Key Information About the Service </h3>
+    <ul>
+        <li>
+            <p><strong>Data Restrictions</strong>: The service must not be used with Protected Health Information (PHI)
+                or other <a href="https://uit.stanford.edu/guide/riskclassifications">High-Risk data</a>. Consult the
+                IRB for guidance on data de-identification and privacy policies for human subject research. Avoid
+                submitting data that can directly link to individuals.</p>
+        </li>
+        <li>
+            <p><strong>Security</strong>: All client-server communication uses HTTPS with TLS/SSL encryption.</p>
+        </li>
+        <li>
+            <p><strong>Privacy</strong>: The service does not log geocoding requests, and input data is not retained.
+            </p>
+        </li>
+        <li>
+            <p><strong>Infrastructure</strong>: Hosted on Stanford hardware within the Stanford Network.</p>
+        </li>
+        <li>
+            <p><strong>Intended Use</strong>: Designed for bulk geocoding of thousands to millions of place names or
+                addresses, specifically for Stanford researchers.</p>
+        </li>
+        <li>
+            <p><strong>Development Status</strong>: The service is under active development and does not currently
+                include a Service Level Agreement (SLA) or guarantees of uptime. Temporary outages may occur during
+                maintenance.</p>
+        </li>
+        <li>
+            <p><strong>User Notifications</strong>: Maintenance updates are shared via the <a
+                    href="https://mailman.stanford.edu/mailman/listinfo/stanfordgis">stanfordgis@lists.stanford.edu</a>
+                mailing list and <a href="https://stanford-geospatial.slack.com/">Stanford Geospatial Slack</a>.</p>
+        </li>
+    </ul>
+    <h2 id="connecting-to-locatorstanfordedu-services">Connecting to <a
+            href="http://locator.stanford.edu">locator.stanford.edu</a> Services </h2>
+    <p>The <strong><a href="http://locator.stanford.edu">locator.stanford.edu</a></strong> geocoding services work
+        natively with ArcGIS Pro, offering seamless integration for geocoding workflows. These services are
+        IP-restricted to the Stanford Network, including VPN access. If you cannot connect, ensure you are using the
+        Stanford AnyConnect VPN. For further assistance, contact <a
+            href="mailto:stacemaples@stanford.edu">stacemaples@stanford.edu</a>.</p>
+    <h3 id="using-esri-desktop-clients">Using Esri Desktop Clients </h3>
+    <h4 id="arcgis-pro">ArcGIS Pro </h4>
+    <p>To connect to <strong><a href="http://locator.stanford.edu">locator.stanford.edu</a></strong> services in the
+        latest version of ArcGIS Pro:</p>
+    <ol>
+        <li>Ensure you are connected to the Stanford Network or using the Stanford AnyConnect VPN.</li>
+        <li>Open ArcGIS Pro.</li>
+        <li>Navigate to <strong>Insert &gt; Connections &gt; Servers &gt; Add ArcGIS Server</strong>.</li>
+        <li>Enter the following for the <strong>Server URL</strong>:<br>
+            <code>https://locator.stanford.edu/arcgis</code>
+        </li>
+        <li>Leave the <strong>Username/Password</strong> fields blank and click <strong>OK</strong>.</li>
+        <li>Once the connection is established, expand the <strong><a
+                    href="http://locator.stanford.edu">locator.stanford.edu</a></strong> server to view available
+            services.</li>
+        <li>To use a geocoding service, right-click it and select <strong>Add To Project</strong>.</li>
+        <li>The selected geocoding service will now appear in the <strong>Locators</strong> folder of your project,
+            ready for use.</li>
+    </ol>
+    <p>You can find more information on using geocoding tools in ArcGIS Pro in <a
+            href="https://pro.arcgis.com/en/pro-app/latest/help/data/geocoding/what-is-geocoding.htm">Esri's
+            "Introducing Geocoding" documentation</a>.</p>
+    <h2 id="accessing-through-the-rest-api">Accessing Through the REST API </h2>
+    <p>The geocoding services are also accessible through the REST API at:<br>
+        <a href="https://locator.stanford.edu/arcgis/">https://locator.stanford.edu/arcgis/</a>.
+    </p>
+    <p>Full REST API documentation is available here:</p>
+    <ul>
+        <li>ArcGIS Server 1.9.1 REST API: <a
+                href="https://locator.stanford.edu/arcgis/sdk/rest/index.html">https://locator.stanford.edu/arcgis/sdk/rest/index.html</a>
+        </li>
+        <li>Geocoding Tools Documentation: <a
+                href="https://locator.stanford.edu/arcgis/sdk/rest/index.html#/Geocode_Addresses/02ss00000040000000/">https://locator.stanford.edu/arcgis/sdk/rest/index.html#/Geocode_Addresses/02ss00000040000000/</a>
+        </li>
+    </ul>
+    <p>These resources provide details for accessing and using geocoding services programmatically.</p>
+    <h3 id="service-endpoints">Service Endpoints </h3>
+    <p>The following region-specific geocoding services are available through <strong><a
+                href="http://locator.stanford.edu">locator.stanford.edu</a></strong>:</p>
+    <ul>
+        <li>
+            <p><strong>US Street Addresses</strong><br>
+                <a
+                    href="https://locator.stanford.edu/arcgis/rest/services/geocode/USA/GeocodeServer">https://locator.stanford.edu/arcgis/rest/services/geocode/USA/GeocodeServer</a>
+            </p>
+        </li>
+        <li>
+            <p><strong>Latin America Composite</strong><br>
+                (Street Addresses, Place Names, Administrative Units, and Reverse Geocoding)<br>
+                <a
+                    href="https://locator.stanford.edu/arcgis/rest/services/geocode/LatinAmerica/GeocodeServer">https://locator.stanford.edu/arcgis/rest/services/geocode/LatinAmerica/GeocodeServer</a>
+            </p>
+        </li>
+        <li>
+            <p><strong>North America Composite</strong><br>
+                (Street Addresses, Place Names, Administrative Units, and Reverse Geocoding)<br>
+                <a
+                    href="https://locator.stanford.edu/arcgis/rest/services/geocode/NorthAmerica/GeocodeServer">https://locator.stanford.edu/arcgis/rest/services/geocode/NorthAmerica/GeocodeServer</a>
+            </p>
+        </li>
+        <li>
+            <p><strong>Europe Composite</strong><br>
+                (Street Addresses, Place Names, Administrative Units, and Reverse Geocoding)<br>
+                <a
+                    href="https://locator.stanford.edu/arcgis/rest/services/geocode/Europe/GeocodeServer">https://locator.stanford.edu/arcgis/rest/services/geocode/Europe/GeocodeServer</a>
+            </p>
+        </li>
+        <li>
+            <p><strong>Asia Pacific Composite</strong><br>
+                (Street Addresses, Place Names, Administrative Units, and Reverse Geocoding)<br>
+                <a
+                    href="https://locator.stanford.edu/arcgis/rest/services/geocode/AsiaPacific/GeocodeServer">https://locator.stanford.edu/arcgis/rest/services/geocode/AsiaPacific/GeocodeServer</a>
+            </p>
+        </li>
+        <li>
+            <p><strong>Africa Composite</strong><br>
+                (Street Addresses, Place Names, Administrative Units, and Reverse Geocoding)<br>
+                <a
+                    href="https://locator.stanford.edu/arcgis/rest/services/geocode/Africa/GeocodeServer">https://locator.stanford.edu/arcgis/rest/services/geocode/Africa/GeocodeServer</a>
+            </p>
+        </li>
+    </ul>
+    <h2 id="other-ways-to-use-locatorstanfordedu">Other ways to use <a
+            href="http://locator.stanford.edu">locator.stanford.edu</a> </h2>
+    <h3 id="r--rstudio">R &amp; RStudio </h3>
+    <p>
+        This repository contains R scripts for batch geocoding using the Stanford Locator REST API. 
+        You can find the main R script here:<br>
+        <a href="https://github.com/StanfordGeospatialCenter/Locator-Scripts/blob/main/locator_geocode_Script.R">
+            locator_geocode_Script.R
+        </a> &mdash; Batch geocode addresses from a CSV file, with progress reporting and robust output.
+    </p>
+    <p>
+        Our colleague, <a href="https://profiles.stanford.edu/claudia-engel">Claudia Engel</a>, from <a
+            href="https://library.stanford.edu/research/cidr">The Center for Interdisciplinary Digital Research</a>, has
+        also created a repository with support materials for accessing the <a
+            href="http://locator.stanford.edu">locator.stanford.edu</a> services from R and RStudio:<br>
+        <a href="https://github.com/cengel/ArcGIS_geocoding">cengel's ArcGIS_geocoding for R Repo on Github</a>
+    </p>
+    <h3 id="python">Python &amp; Jupyter Notebooks</h3>
+    <p>
+        This repository also provides Jupyter Notebooks for Python-based batch geocoding and data conversion:
+        <ul>
+            <li>
+                <a href="https://github.com/StanfordGeospatialCenter/Locator-Scripts/blob/main/locator_batch_geocode_rest.ipynb">
+                    locator_batch_geocode_rest.ipynb
+                </a> &mdash; Step-by-step notebook for batch geocoding addresses using the Stanford Locator REST API. Includes parameter setup, batching, progress reporting, and CSV output.
+            </li>
+            <li>
+                <a href="https://github.com/StanfordGeospatialCenter/Locator-Scripts/blob/main/locator_json_to_geojson_address_geocode_rest.ipynb">
+                    locator_json_to_geojson_address_geocode_rest.ipynb
+                </a> &mdash; Notebook for converting ArcGIS geocoding JSON results into standard GeoJSON format for GIS and mapping applications.
+            </li>
+        </ul>
+        You can use these notebooks interactively in JupyterLab or VS Code, or adapt the code for your own Python scripts.
+    </p>
+    <p>
+        The Stanford Geospatial Center also maintains a Python geocoding resource repository:<br>
+        <a href="https://github.com/StanfordGeospatialCenter/SGC-Python-Geocoder">StanfordGeospatialCenter's SGC-Python-Geocoder repository on Github</a>
+    </p>
+    <h3 id="data-files">Sample Data Files</h3>
+    <ul>
+        <li>
+            <a href="https://github.com/StanfordGeospatialCenter/Locator-Scripts/blob/main/Data/oneMillionAddresses.csv">
+                Data/oneMillionAddresses.csv
+            </a> &mdash; Large sample address file for batch geocoding.
+        </li>
+        <li>
+            <a href="https://github.com/StanfordGeospatialCenter/Locator-Scripts/blob/main/Data/199Addresses.csv">
+                Data/199Addresses.csv
+            </a> &mdash; Small sample address file for quick testing and demonstration.
+        </li>
+    </ul>
+    <h2 id="more-information">More Information </h2>
+    <p>
+        For a full overview of the scripts, data, and usage instructions, see the repository README:<br>
+        <a href="https://github.com/StanfordGeospatialCenter/Locator-Scripts/blob/main/README.md">README.md</a>
+    </p>
+    <p>
+        <a href="https://desktop.arcgis.com/en/arcmap/latest/manage-data/geocoding/what-is-geocoding.htm">Esri's
+            "Introducing Geocoding" documentation</a>
+    </p>
+    </div>
+</body>
+
+</html>
