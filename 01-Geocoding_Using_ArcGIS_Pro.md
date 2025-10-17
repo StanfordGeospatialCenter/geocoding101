@@ -61,17 +61,30 @@ Begin by downloading the `clowns.csv` dataset and saving it to an easy-to-find f
 1. In ArcGIS Pro, open the **Catalog** pane.
 2. Under **Project > Folders**, right-click and choose **Add Folder Connection** (or click the folder icon ► **Add Folder Connection**) and browse to the folder where you saved `clowns.csv`. This makes the file easy to find from within ArcGIS Pro.
 
-
 ![](images/20251016_154651_image.png)
 
+
+
+![](images/20251016_155202_image.png)
+
 1. In the **Catalog** pane, expand the newly added folder and confirm `clowns.csv` is visible.
-5. Right-click `clowns.csv` and select **Add To Current Map** (or **Create Table** if prompted).
-6. To enable geocoding, right-click the resulting table and choose **Export** > **Table To Geodatabase**.
-7. Select your project geodatabase as the destination and click **OK**.
-8. In the **Catalog** pane, browse to the `clowns.csv` file in the `Data/` folder.
-9. Right-click `clowns.csv` and select **Add to Current Map** (or **Create Table** if prompted).
-10. To enable geocoding, right-click the table and choose **Export** > **Table To Geodatabase**.
-11. Select your project geodatabase as the destination and click **OK**.
+
+
+![](images/20251016_155237_image.png)
+
+1. Right-click `clowns.csv` and select **Add To (New) or Current Map** (or **Create Table** if prompted).
+2. To enable geocoding, right-click the resulting table and choose **Data** > **Export to Table**.
+
+![](images/20251016_155427_image.png)
+
+1. Select your project geodatabase as the destination and give the resulting table an appropriate name
+2. Click **OK**.
+
+
+![](images/20251016_155525_image.png)
+
+
+![](images/20251016_155900_image.png)
 
 ## Step 4: Fix ZIP Codes with Dropped Leading Zeros
 
@@ -79,34 +92,112 @@ Begin by downloading the `clowns.csv` dataset and saving it to an easy-to-find f
 
 To restore ZIP codes:
 
-1. Open the attribute table for your imported data.
-2. Click **Add Field** to create a new field:
+1. Right-click and Open the Attribute table for your imported data.
+
+![](images/20251016_155938_image.png)
+
+1. Click **Add Field** to create a new field:
+
    - Name: `ZIP_str`
    - Type: **Text (String)**
-   - Length: 5
+   - Alias: Zip String
+
+     ![](images/20251016_161315_image.png)
    - Save the new field.
-3. Click **Calculate Field** for `ZIP_str`.
-4. In the calculation dialog:
-   - Select records where `ZIP` < 10000 (these are missing a leading zero).
-   - For these, set `ZIP_str = '0' + str(!ZIP!)`
-   - Flip the selection (select records where `ZIP` >= 10000).
-   - For these, set `ZIP_str = str(!ZIP!)`
-5. Save your edits. Now all ZIP codes are correctly formatted as 5-digit strings.
+
+     ![](images/20251016_161345_image.png)
+2. Click on the Select by Attributes button to open the dialog.
+
+   * Selection Type: New Selection
+   * Expression: `Where Zipcode is less than 9999`
+3. Click Apply to Select all records that are missing a digit.
+
+![](images/20251016_161742_image.png)
+
+
+1. Right-Click on `ZIP_str` and select **Calculate Field**.
+
+![](images/20251016_161649_image.png)
+
+1. In the calculation dialog:
+   - Leave the option to "Use the selected records" checked
+   - Use Esri's **Arcade** scripting language (it's quite similar to Excel's functions, so easy to learn)
+   - For this selection, set the column values to: `CONCATENATE('0',Text($feature.ZipCode))`
+
+![](images/20251016_162912_image.png)
+
+1. Click on the Switch button  to switch the selection to all valid zipcodes.
+
+   ![](images/20251016_163058_image.png)
+2. In the calculation dialog:- Leave the option to "Use the selected records" checked
+
+   - Again, use the **Arcade** scripting language
+   - For this selection, set the column values to: `Text($feature.ZipCode)`
+3. Now *most* ZIP codes (we're ignoring a few with leading 00s) are correctly formatted as 5-digit strings.
+4. Edits are saved automatically.
+5. Clear your selection by clicking on the Clear button: 
+
+   ![](images/20251017_093713_image.png)
 
 ## Step 5: Geocode Your Data
 
-1. Open the **Geocode Table** tool (Analysis > Tools > Search for "Geocode Table").
-2. Set your geodatabase table as the **Input Table**.
-3. Choose the appropriate Stanford locator service as the **Input Address Locator**.
-4. Map your address fields (including `ZIP_str` for ZIP code).
-5. Set the **Output Feature Class** location.
-6. Click **Run** to geocode your data.
+1. Right-click on the `clowns_table` you just cleaned up and select the **Geocode Table** tool.
+
+
+![](images/20251017_093834_image.png)
+
+### Walking through the geocoding wizard:
+
+1. Choose the appropriate Stanford locator service as the **Input Address Locator**, in this case, the `geocode/USA locator`, you added earlier.
+2. Confirm the `clowns_table` as the **Input Table**, and set your **Data Structure** to "**More than one field**"
+3. Map your address fields (being sure to remap the `ZIP4` locator field to the `ZIP_str`).
+4. Confirm the Output Settings (use the Info  ![](images/20251017_094653_image.png) icon to explore info about options)
+5. Select `United States` as the "**Limit by Country**" setting.
+6. Select `Postal` as the "**Limit by Category**" setting
+7. Double-check your setting and Field Mappings in the Final Panel.
+8. Click **Run** to geocode your data.
+
+
+![](images/20251017_094231_image.png)
+
+![](images/20251017_094252_image.png)
+
+![](images/20251017_094412_image.png)
+
+
+![](images/20251017_094601_image.png)
+
+
+![](images/20251017_094843_image.png)
+
+
+![](images/20251017_094855_image.png)
+
+![](images/20251017_095130_image.png)
 
 ## Step 6: Review Results
 
-- The output feature class will be added to your map.
-- Check the attribute table for match status and scores.
-- Unmatched records may need further cleaning or manual review.
+
+![](images/20251017_095229_image.png)
+
+The output feature class will be added to your map.
+
+## Check the attribute table for match status and scores.
+
+1. Click **Yes** in the "**Geocoding Complete**" pop-up to begin the review process
+
+
+![](images/20251017_095415_image.png)
+
+1. You can use the **Rematch Addresses Dialog** to investigate and rematch (or approve matches with scores lower than the automatic threshhold)
+2. Use the ![](images/20251017_095637_image.png) button to match a record.
+3. You can also use the Select from Map button  ![](images/20251017_095943_image.png) to physically place a point for a record.
+
+
+![](images/20251017_095620_image.png)
+
+3. Unmatched records may need further cleaning or manual review.
+4. Right-click on the new `clowns_table_Geocoded` Layer in the Table of COntents and Select **Zoom to Layer** to see your final geocoded result.
 
 ## Additional Geocoding Tips and Best Practices
 
@@ -118,7 +209,7 @@ To restore ZIP codes:
 
 ## Troubleshooting
 
-- If you cannot connect to locator.stanford.edu, verify VPN/network status and server URL.
+- If you cannot connect to [locator.stanford.edu](https://locator.stanford.edu), verify VPN/network status and server URL. (If you can see the Info Page at that link, you should be good to go!)
 - Low match rates? Review data quality, field mapping, and locator choice.
 - Service unavailable? Check [stanfordgis mailing list](https://mailman.stanford.edu/mailman/listinfo/stanfordgis) or contact support.
 
