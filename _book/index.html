@@ -1,0 +1,478 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Introduction to Geocoding · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.1.4">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="00-Geocoding_Using_ArcGIS_Online.html" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter active" data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction to Geocoding
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Geocoding Tutorials</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="00-Geocoding_Using_ArcGIS_Online.html">
+            
+                <a href="00-Geocoding_Using_ArcGIS_Online.html">
+            
+                    
+                    Geocoding with ArcGIS Online
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="01-Geocoding_Using_ArcGIS_Pro.html">
+            
+                <a href="01-Geocoding_Using_ArcGIS_Pro.html">
+            
+                    
+                    Geocoding Using ArcGIS Pro
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="02-Geocoding_Using_OpenRefine.html">
+            
+                <a href="02-Geocoding_Using_OpenRefine.html">
+            
+                    
+                    Geocoding Using OpenRefine
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="03-Geocoding_with_Python.html">
+            
+                <a href="03-Geocoding_with_Python.html">
+            
+                    
+                    Geocoding with Python
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="04-Other_Geocoding_Services.html">
+            
+                <a href="04-Other_Geocoding_Services.html">
+            
+                    
+                    Other Geocoding Services
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Introduction to Geocoding</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="geocoding-101-an-introduction-for-research-data-preparation">Geocoding 101: An Introduction for Research Data Preparation</h1>
+<p>Slides: <a href="https://slides.com/staceymaples/geocoding-101" target="_blank">https://slides.com/staceymaples/geocoding-101</a></p>
+<h2 id="what-is-geocoding">What is Geocoding?</h2>
+<p>Geocoding is the process of transforming location descriptions—such as street addresses, place names, or administrative boundaries—into geographic coordinates (latitude and longitude). This transformation is fundamental to spatial analysis, allowing researchers to map, visualize, and analyze location-based data across disciplines including public health, social sciences, history, environmental studies, and more.</p>
+<p>In the context of research data preparation, geocoding serves as a critical bridge between textual location information and spatial analysis. Once locations are converted to coordinates, researchers can:</p>
+<ul>
+<li><strong>Map and visualize</strong> data to identify spatial patterns and trends</li>
+<li><strong>Extract values</strong> from other spatial datasets (e.g., climate data, demographic information, elevation)</li>
+<li><strong>Measure proximity</strong> to features and phenomena (e.g., distance to hospitals, schools, or environmental hazards)</li>
+<li><strong>Perform spatial joins</strong> to combine datasets based on location</li>
+<li><strong>Conduct spatial statistical analyses</strong> to test hypotheses about geographic relationships</li>
+</ul>
+<p>Geocoding relies on reference datasets—such as street networks, administrative boundaries, gazetteers (place name databases), and points of interest—to match input locations to their corresponding coordinates. The quality and coverage of these reference datasets directly impact the accuracy and success rate of geocoding operations.</p>
+<h2 id="types-of-geocoding">Types of Geocoding</h2>
+<p>Different research questions require different types of geocoding. Understanding these types helps researchers choose the appropriate method and evaluate the quality of their results.</p>
+<h3 id="address-geocoding">Address Geocoding</h3>
+<p>Address geocoding converts street addresses into coordinates, typically with high precision (rooftop or street-level accuracy). This is one of the most common geocoding tasks in research.</p>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Mapping patient addresses for health studies (with appropriate privacy protections)</li>
+<li>Analyzing customer or business locations</li>
+<li>Studying residential patterns and neighborhood characteristics</li>
+<li>Historical address research</li>
+</ul>
+<p><strong>Considerations:</strong></p>
+<ul>
+<li>Address formats vary by country and region</li>
+<li>Accuracy depends on the completeness and currency of reference street data</li>
+<li>Address standardization and cleaning often necessary before geocoding</li>
+<li>Privacy concerns must be addressed when working with residential addresses</li>
+</ul>
+<h3 id="place-name-geocoding">Place Name Geocoding</h3>
+<p>Place name (or toponym) geocoding converts named locations—such as cities, landmarks, neighborhoods, or natural features—into coordinates. This typically returns a representative point for the named feature.</p>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Geocoding historical place names from archives or texts</li>
+<li>Mapping event locations from news reports or social media</li>
+<li>Analyzing place mentions in literature or documents</li>
+<li>Studying geographic distributions of cultural or historical phenomena</li>
+</ul>
+<p><strong>Considerations:</strong></p>
+<ul>
+<li>Place names can be ambiguous (e.g., "Springfield" exists in many states)</li>
+<li>Historical place names may have changed or no longer exist</li>
+<li>Returned coordinates are usually centroids, not precise locations</li>
+<li>Different gazetteers may have different coverage and accuracy</li>
+</ul>
+<h3 id="administrative-geocoding">Administrative Geocoding</h3>
+<p>Administrative geocoding converts administrative unit names (countries, states, counties, postal codes, etc.) into representative coordinates, typically the centroid of the area.</p>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Mapping aggregated data reported by administrative units</li>
+<li>Joining datasets based on administrative geography</li>
+<li>Analyzing regional patterns and comparisons</li>
+<li>Creating choropleth maps</li>
+</ul>
+<p><strong>Considerations:</strong></p>
+<ul>
+<li>Returns centroid points, not boundaries (separate boundary data needed for polygon mapping)</li>
+<li>Administrative boundaries change over time</li>
+<li>Hierarchical specificity matters (city vs. county vs. state)</li>
+<li>Census and other official data often align with administrative units</li>
+</ul>
+<h3 id="reverse-geocoding">Reverse Geocoding</h3>
+<p>Reverse geocoding works in the opposite direction: it takes coordinates and returns information about the nearest feature, such as an address, place name, or administrative unit.</p>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Converting GPS coordinates to readable addresses</li>
+<li>Identifying locations from coordinate data</li>
+<li>Enriching coordinate-only datasets with contextual information</li>
+<li>Quality checking geocoding results</li>
+</ul>
+<p><strong>Considerations:</strong></p>
+<ul>
+<li>Returns nearest match, which may not be the exact location</li>
+<li>Useful for validating forward geocoding results</li>
+<li>Can help identify what type of feature a coordinate represents</li>
+</ul>
+<h3 id="point-of-interest-poi-geocoding">Point of Interest (POI) Geocoding</h3>
+<p>POI geocoding locates specific types of places such as businesses, landmarks, facilities, or services by name or category.</p>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Mapping hospital, school, or park locations</li>
+<li>Analyzing access to services and amenities</li>
+<li>Studying commercial or institutional distributions</li>
+<li>Creating proximity measures to specific facility types</li>
+</ul>
+<p><strong>Considerations:</strong></p>
+<ul>
+<li>POI databases vary in coverage and currency</li>
+<li>Business locations change frequently</li>
+<li>May require category codes or filters for searches</li>
+<li>Useful for measuring accessibility and spatial equity</li>
+</ul>
+<h3 id="batch-vs-interactive-geocoding">Batch vs. Interactive Geocoding</h3>
+<p>Geocoding can be performed either interactively (one location at a time) or in batch mode (processing many locations simultaneously):</p>
+<ul>
+<li><strong>Interactive geocoding</strong> is useful for small numbers of locations or when human review is needed</li>
+<li><strong>Batch geocoding</strong> is essential for research datasets containing hundreds, thousands, or millions of records</li>
+</ul>
+<p>Research applications typically require batch geocoding capabilities to efficiently process large datasets while maintaining data quality and reproducibility.</p>
+<h2 id="geocoding-quality-and-match-accuracy">Geocoding Quality and Match Accuracy</h2>
+<p>Geocoding quality varies based on:</p>
+<ul>
+<li><strong>Match rate</strong>: The percentage of input records successfully geocoded</li>
+<li><strong>Match accuracy</strong>: How precisely the returned coordinates represent the intended location</li>
+<li><strong>Match score/confidence</strong>: Numerical indicators of geocoding confidence</li>
+<li><strong>Match type</strong>: Whether the match was to an address, street segment, postal code, city, etc.</li>
+</ul>
+<p>High-quality research requires attention to these metrics and often involves:</p>
+<ul>
+<li>Cleaning and standardizing input data</li>
+<li>Reviewing and manually correcting low-confidence matches</li>
+<li>Documenting geocoding methods and match rates</li>
+<li>Considering the appropriate level of precision for the research question</li>
+</ul>
+<h2 id="about-the-stanford-locator-service">About the Stanford Locator Service</h2>
+<p>The Stanford Geospatial Center provides <a href="http://locator.stanford.edu" target="_blank">locator.stanford.edu</a>, a geocoding service designed specifically for research applications and data augmentation. This service supports several types of geocoding operations:</p>
+<ul>
+<li><strong>Address geocoding</strong> for US locations and international addresses</li>
+<li><strong>Place name geocoding</strong> across multiple continents</li>
+<li><strong>Administrative unit geocoding</strong> for various geographic levels</li>
+<li><strong>Reverse geocoding</strong> to convert coordinates back to location information</li>
+</ul>
+<p>The service provides global coverage with region-specific datasets for North America, Latin America, Europe, Asia Pacific, and Africa/Middle East. It is designed for bulk geocoding operations, making it suitable for processing research datasets ranging from thousands to millions of records.</p>
+<p>For Stanford researchers, the locator service offers a secure, privacy-conscious platform for geocoding sensitive research data, with all communication encrypted and no logging of geocoding requests.</p>
+<p><strong>Note on Data Privacy</strong>: When geocoding research data, especially data involving human subjects, researchers must consider privacy and ethical implications. Geocoding can make data more identifiable, so appropriate protections must be in place. The Stanford locator service should not be used with Protected Health Information (PHI) or other high-risk data. Consult your IRB for guidance on data de-identification and privacy policies.</p>
+<h2 id="next-steps">Next Steps</h2>
+<p>This guide provides a conceptual foundation for geocoding in research contexts. For technical details on:</p>
+<ul>
+<li>Connecting to and using the Stanford locator service</li>
+<li>Geocoding workflows in specific tools (ArcGIS Pro, R, Python)</li>
+<li>API access and programmatic geocoding</li>
+<li>Best practices for data preparation and quality control</li>
+</ul>
+<p>Please refer to the additional documentation and tutorials provided by the Stanford Geospatial Center.</p>
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+<li><a href="https://pro.arcgis.com/en/pro-app/latest/help/data/geocoding/what-is-geocoding.htm" target="_blank">Esri's Introduction to Geocoding</a></li>
+<li>Stanford Geospatial Center: <a href="https://library.stanford.edu/research/stanford-geospatial-center" target="_blank">https://library.stanford.edu/research/stanford-geospatial-center</a></li>
+<li>For questions or support: <a href="mailto:stacemaples@stanford.edu" target="_blank">stacemaples@stanford.edu</a></li>
+</ul>
+<hr></hr>
+<p><em>Resources for geocoding in research, provided by the Stanford Geospatial Center</em></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+                <a href="00-Geocoding_Using_ArcGIS_Online.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Geocoding with ArcGIS Online">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Introduction to Geocoding","level":"1.1","depth":1,"next":{"title":"Geocoding with ArcGIS Online","level":"2.1","depth":1,"path":"00-Geocoding_Using_ArcGIS_Online.md","ref":"00-Geocoding_Using_ArcGIS_Online.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2025-10-17T19:31:51.558Z","type":"markdown"},"gitbook":{"version":"6.1.4","time":"2025-10-17T19:33:55.499Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/@honkit/honkit-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

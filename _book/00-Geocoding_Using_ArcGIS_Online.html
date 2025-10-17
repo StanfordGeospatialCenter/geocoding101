@@ -1,0 +1,452 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Geocoding with ArcGIS Online · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.1.4">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="01-Geocoding_Using_ArcGIS_Pro.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction to Geocoding
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Geocoding Tutorials</li>
+        
+        
+    
+        <li class="chapter active" data-level="2.1" data-path="00-Geocoding_Using_ArcGIS_Online.html">
+            
+                <a href="00-Geocoding_Using_ArcGIS_Online.html">
+            
+                    
+                    Geocoding with ArcGIS Online
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="01-Geocoding_Using_ArcGIS_Pro.html">
+            
+                <a href="01-Geocoding_Using_ArcGIS_Pro.html">
+            
+                    
+                    Geocoding Using ArcGIS Pro
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="02-Geocoding_Using_OpenRefine.html">
+            
+                <a href="02-Geocoding_Using_OpenRefine.html">
+            
+                    
+                    Geocoding Using OpenRefine
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="03-Geocoding_with_Python.html">
+            
+                <a href="03-Geocoding_with_Python.html">
+            
+                    
+                    Geocoding with Python
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="04-Other_Geocoding_Services.html">
+            
+                <a href="04-Other_Geocoding_Services.html">
+            
+                    
+                    Other Geocoding Services
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Geocoding with ArcGIS Online</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="geocoding-with-arcgis-online-santa-clara-tattoo-parlors-example">Geocoding with ArcGIS Online: Santa Clara Tattoo Parlors Example</h1>
+<p>This guide will walk you through the process of geocoding a business dataset using ArcGIS Online, with a focus on the Santa Clara Tattoo Parlors data. You'll learn how to upload, prepare, and geocode a CSV file, and how to review and use the resulting map.</p>
+<h2 id="about-the-dataset">About the Dataset</h2>
+<p>The dataset for this exercise is <code>SantaClara_TattooParlors.csv</code>, which contains business information for tattoo parlors in Santa Clara County, California. Each row represents a business and includes fields such as:</p>
+<ul>
+<li>Company Name</li>
+<li>Business Name</li>
+<li>Street Address</li>
+<li>City</li>
+<li>State Abbreviation</li>
+<li>Zip Code</li>
+<li>Telephone Number</li>
+<li>Line of Business</li>
+<li>NAICS/SIC codes</li>
+<li>Sales Volume, Employees, Year Started</li>
+</ul>
+<p>You can view or download the dataset here:</p>
+<ul>
+<li><a href="Data/SantaClara_TattooParlors.csv">SantaClara_TattooParlors.csv</a></li>
+</ul>
+<p><strong>Note:</strong> Some ZIP codes may have lost leading zeros if the file was previously opened in spreadsheet software. See the data preparation section for how to address this.</p>
+<hr></hr>
+<h2 id="step-1-sign-in-to-arcgis-online">Step 1: Sign in to ArcGIS Online</h2>
+<ol>
+<li>Go to <a href="https://stanford.maps.arcgis.com" target="_blank">https://stanford.maps.arcgis.com</a> in your web browser.</li>
+<li><p>Click <strong>Sign In</strong> and use your Stanford credentials.</p>
+<p><img src="images/20251017_102836_image_reduce.png" alt=""></img></p>
+<p><img src="images/20251017_102855_image_reduce-drop-shadow.png" alt=""></img></p>
+<p><img src="images/20251017_102921_image_reduce-drop-shadow.png" alt=""></img></p>
+</li>
+</ol>
+<h2 id="step-2-add-the-tattoo-parlor-csv-to-your-content">Step 2: Add the Tattoo Parlor CSV to Your Content</h2>
+<ol>
+<li>In the top menu, click <strong>Content</strong>.</li>
+<li>Click <strong>New item</strong> &gt; <strong>Your device</strong>.</li>
+</ol>
+<p><img src="images/20251017_103122_image_reduce-drop-shadow.png" alt=""></img></p>
+<p><img src="images/20251017_103211_image_reduce-drop-shadow.png" alt=""></img></p>
+<ol>
+<li>Browse to and select <code>SantaClara_TattooParlors.csv</code> from your local computer.</li>
+</ol>
+<p><img src="images/20251017_103234_image_reduce-drop-shadow.png" alt=""></img></p>
+<ol>
+<li>Accept the default to "<strong>Add SantaClara_TattooParlors.csv and create a hosted feature layer or table</strong>" and Click <strong>Next</strong> and review the detected fields.</li>
+</ol>
+<p><img src="images/20251017_103304_image_reduce-drop-shadow.png" alt=""></img></p>
+<ol>
+<li>Confirm importing all fields, and double check the data types. For instance, is the <code>Zip Code</code> set to String? Click <strong>Next</strong> once confirmed.</li>
+</ol>
+<p><img src="images/20251017_104005_image_reduce-drop-shadow.png" alt=""></img></p>
+<ol>
+<li>Set the Location Setting fields:<ul>
+<li><strong>Location type:</strong> Addresses or Places</li>
+<li><strong>Address field:</strong> <code>Street Address</code></li>
+<li><strong>City field:</strong> <code>City</code></li>
+<li><strong>State field:</strong> <code>State Abbreviation</code></li>
+<li><strong>ZIP Code field:</strong> <code>Zip Code</code></li>
+</ul>
+</li>
+</ol>
+<p><img src="images/20251017_104142_image_reduce-drop-shadow.png" alt=""></img></p>
+<p><img src="images/20251017_104204_image_reduce-drop-shadow.png" alt=""></img></p>
+<ol>
+<li>Click <strong>Next</strong> and provide a title, tags, and folder location for your new hosted feature layer.</li>
+</ol>
+<p><img src="images/20251017_104340_image_reduce-drop-shadow.png" alt=""></img></p>
+<ol>
+<li>Click <strong>Save</strong> to upload and publish the data.</li>
+</ol>
+<p>Note: If you get an error about duplicate filenames, simply add your initials, or a successive numeric value to the end of your file name.</p>
+<p><img src="images/20251017_104401_image_reduce-drop-shadow.png" alt=""></img></p>
+<p><img src="images/20251017_104457_image_reduce-drop-shadow.png" alt=""></img></p>
+<h2 id="step-4-geocode-and-map-the-data">Step 4: Geocode and Map the Data</h2>
+<p>If you uploaded the CSV as an address table, ArcGIS Online will automatically attempt to geocode the records and display them on the map.</p>
+<p><img src="images/20251017_104616_image_reduce-drop-shadow.png" alt=""></img></p>
+<ol>
+<li>Click <strong>Yes</strong> in the dialgo to <strong>Open</strong> the <strong>hosted feature layer</strong> in <strong>Map Viewer</strong>.</li>
+<li><strong>Review</strong> the points on the map for accuracy.</li>
+</ol>
+<p><img src="images/20251017_104746_image_reduce-drop-shadow.png" alt=""></img></p>
+<h2 id="step-5-save-and-share-your-map">Step 5: Save and Share Your Map</h2>
+<ol>
+<li>In the Map Viewer, click <strong>Save and open</strong> &gt; <strong>Save as</strong> to save your map.</li>
+</ol>
+<p><img src="images/20251017_104729_image_reduce-drop-shadow.png" alt=""></img></p>
+<ol>
+<li>Add a title, tags, and summary.</li>
+</ol>
+<p><img src="images/20251017_104849_image_reduce-drop-shadow.png" alt=""></img></p>
+<ol>
+<li>To share your map, click <strong>Share</strong> and choose the appropriate sharing settings (e.g., Stanford, public, or specific groups).</li>
+</ol>
+<p><img src="images/20251017_104935_image_reduce-drop-shadow.png" alt=""></img></p>
+<p><img src="images/20251017_105002_image_reduce-drop-shadow.png" alt=""></img></p>
+<ol>
+<li>If the content IN YOUR MAP does not have teh same SHaring Permissions as the settings you just gave to the map, you should be prompted to Review sharing for the content in your map.</li>
+</ol>
+<p><img src="images/20251017_105033_image_reduce-drop-shadow.png" alt=""></img></p>
+<ol>
+<li>Use the Update sharing to easily update the Share settings of all content in the current map.</li>
+</ol>
+<p><img src="images/20251017_105057_image_reduce-drop-shadow.png" alt=""></img></p>
+<h2 id="tips-and-best-practices">Tips and Best Practices</h2>
+<ul>
+<li>Always check for formatting issues after importing data from spreadsheets.</li>
+<li>Use string fields for ZIP codes to preserve leading zeros.</li>
+<li>Document your workflow for reproducibility.</li>
+<li>For help, contact <a href="mailto:stacemaples@stanford.edu" target="_blank">stacemaples@stanford.edu</a>.</li>
+</ul>
+<hr></hr>
+<p><a href="./">← Back to Geocoding 101 Introduction</a></p>
+<p><em>Tutorial prepared by the Stanford Geospatial Center</em></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Introduction to Geocoding">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="01-Geocoding_Using_ArcGIS_Pro.html" class="navigation navigation-next " aria-label="Next page: Geocoding Using ArcGIS Pro">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Geocoding with ArcGIS Online","level":"2.1","depth":1,"next":{"title":"Geocoding Using ArcGIS Pro","level":"2.2","depth":1,"path":"01-Geocoding_Using_ArcGIS_Pro.md","ref":"01-Geocoding_Using_ArcGIS_Pro.md","articles":[]},"previous":{"title":"Introduction to Geocoding","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"00-Geocoding_Using_ArcGIS_Online.md","mtime":"2025-10-17T17:55:18.094Z","type":"markdown"},"gitbook":{"version":"6.1.4","time":"2025-10-17T19:33:55.499Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/@honkit/honkit-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
