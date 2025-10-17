@@ -30,7 +30,7 @@ For the purposes of this exercise, it wouldn’t hurt to watch the 3rd video, li
 
 You might also want to take a look at this page on **_Expressions_** in OpenRefine:
 
-https://[docs.openrefine.org/manual/expressions](https://docs.openrefine.org/manual/expressions)
+[https://[docs.openrefine.org/manual/expressions](https://docs.openrefine.org/manual/expressions)
 
 And, here’s the full **User Manual**:
 
