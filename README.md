@@ -1,6 +1,25 @@
 # Geocoding 101: An Introduction for Research Data Preparation
 Slides: https://slides.com/staceymaples/geocoding-101
 
+## Code Examples
+
+* [Python Batch Geocoding Notebook](Code/locator_batch_address_geocode_rest.ipynb)
+* [R Geocoding Script](Code/locator_address_geocode.R)
+* [JSON to GeoJSON Conversion](Code/locator_json_to_geojson_address_geocode_rest.ipynb)
+
+## Sample Data
+
+* [199 Addresses Dataset](Data/199Addresses.csv)
+* [California Haunted Places](Data/ca_haunted_places.csv)
+* [Clowns Business Locations](Data/clowns.csv)
+* [Santa Clara Tattoo Parlors](Data/SantaClara_TattooParlors.csv)
+* [Geocoded 199 Addresses (Sample Output)](Data/geocoded_199Addresses.csv)
+
+## Additional Resources
+
+* [Locator Service Information](locatorinfo.html)
+* [GeoLocate JSON Documentation](glcJSON.pdf)
+
 ## What is Geocoding?
 
 Geocoding is the process of transforming location descriptions—such as street addresses, place names, or administrative boundaries—into geographic coordinates (latitude and longitude). This transformation is fundamental to spatial analysis, allowing researchers to map, visualize, and analyze location-based data across disciplines including public health, social sciences, history, environmental studies, and more.
@@ -147,6 +166,8 @@ This guide provides a conceptual foundation for geocoding in research contexts. 
 - Best practices for data preparation and quality control
 
 Please refer to the additional documentation and tutorials provided by the Stanford Geospatial Center.
+
+
 
 ## Additional Resources
 
