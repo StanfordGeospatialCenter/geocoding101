@@ -1,6 +1,7 @@
 # Geocoding 101: An Introduction for Research Data Preparation
 
-Slides: [https://slides.com/staceymaples/geocoding-101](https://slides.com/staceymaples/geocoding-101)
+Slides: [https://slides.com/staceymaples/geocoding-101](https://slides.com/staceymaples/geocoding-101)  
+
 This Guide is published on Github Pages at: [https://stanfordgeospatialcenter.github.io/geocoding101/](https://stanfordgeospatialcenter.github.io/geocoding101/)
 
 ## Code Examples
