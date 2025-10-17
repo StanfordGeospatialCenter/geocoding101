@@ -1,4 +1,5 @@
 # Geocoding 101: An Introduction for Research Data Preparation
+Slides: https://slides.com/staceymaples/geocoding-101
 
 ## What is Geocoding?
 
