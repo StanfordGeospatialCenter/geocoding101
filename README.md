@@ -1,5 +1,7 @@
 # Geocoding 101: An Introduction for Research Data Preparation
 
+This workshop repository is at [https://github.com/StanfordGeospatialCenter/geocoding101](https://github.com/StanfordGeospatialCenter/geocoding101)
+
 
 Slides: [https://slides.com/staceymaples/geocoding-101](https://slides.com/staceymaples/geocoding-101)  
 
